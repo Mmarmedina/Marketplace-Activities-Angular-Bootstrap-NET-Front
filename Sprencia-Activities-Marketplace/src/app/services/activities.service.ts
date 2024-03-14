@@ -6,4 +6,6 @@ import { Injectable } from '@angular/core';
 export class ActivitiesService {
 
   constructor() { }
+
+  // Este es el servicio de actividades
 }
