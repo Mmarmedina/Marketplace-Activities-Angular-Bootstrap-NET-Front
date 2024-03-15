@@ -3,36 +3,36 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
-import { ActivitiesSprenciaComponent } from './activities-sprencia/activities-sprencia.component';
-import { ActivitiesComponent } from './activities/activities.component';
-import { ReviewsSprenciaComponent } from './reviews-sprencia/reviews-sprencia.component';
-import { ThumbnailActivityComponent } from './thumbnail-activity/thumbnail-activity.component';
-import { ReviewActivityComponent } from './review-activity/review-activity.component';
-import { ActivityThumbnailComponent } from './activity-thumbnail/activity-thumbnail.component';
-import { ReviewSprenciaThumbnailComponent } from './review-sprencia-thumbnail/review-sprencia-thumbnail.component';
-import { FooterComponent } from './footer/footer.component';
-import { ContactComponent } from './contact/contact.component';
-import { ViewActivityComponent } from './view-activity/view-activity.component';
-import { ActivityViewComponent } from './activity-view/activity-view.component';
+import { ActivitiesComponent } from './components/activities/activities.component';
+import { ActivityThumbnailComponent } from './components/activity-thumbnail/activity-thumbnail.component';
+import { ActivityViewComponent } from './components/activity-view/activity-view.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavComponent } from './components/nav/nav.component';
+import { ReviewsActivityThumbnailComponent } from './components/reviews-activity-thumbnail/reviews-activity-thumbnail.component';
+import { ReviewsSprenciaComponent } from './components/reviews-sprencia/reviews-sprencia.component';
+import { ReviewsSprenciaThumbnailComponent } from './components/reviews-sprencia-thumbnail/reviews-sprencia-thumbnail.component';
+import { UpdateActivityComponent } from './components/update-activity/update-activity.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NewActivityComponent } from './components/new-activity/new-activity.component';
+import { ReviewsActivityComponent } from './components/reviews-activity/reviews-activity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ActivitiesComponent,
+    ActivityThumbnailComponent,
+    ActivityViewComponent,
+    ContactComponent,
+    FooterComponent,
     HomeComponent,
     NavComponent,
-    ActivitiesSprenciaComponent,
-    ActivitiesComponent,
+    NewActivityComponent,
+    ReviewsActivityComponent,
+    ReviewsActivityThumbnailComponent,
     ReviewsSprenciaComponent,
-    ThumbnailActivityComponent,
-    ReviewActivityComponent,
-    ActivityThumbnailComponent,
-    ReviewSprenciaThumbnailComponent,
-    FooterComponent,
-    ContactComponent,
-    ViewActivityComponent,
-    ActivityViewComponent
+    ReviewsSprenciaThumbnailComponent,
+    UpdateActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -42,3 +42,4 @@ import { ActivityViewComponent } from './activity-view/activity-view.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
