@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivitiesService } from '../../services/activities.service';
 
 @Component({
   selector: 'app-form-new-activity',
@@ -7,4 +9,14 @@ import { Component } from '@angular/core';
 })
 export class FormNewActivityComponent {
 
+    // formNewActivity: FormGroup;
+
+    // constructor (private activitiesService: ActivitiesService){
+    //   this.formNewActivity = new FormGroup({
+    //     title = FormControl('', [],)
+    //     description = 
+    //     price = 
+    //     schedule: 
+    //   })
+    // }
 }

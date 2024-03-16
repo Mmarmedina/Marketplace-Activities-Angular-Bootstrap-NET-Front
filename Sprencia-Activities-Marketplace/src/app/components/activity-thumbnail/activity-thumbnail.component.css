@@ -1,0 +1,35 @@
+.text {
+    line-height: 1.7rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.card-img-top {
+    /* border-radius: 10px; */
+    padding: 20px;
+    cursor: pointer;
+}
+
+.card {
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    height: 100%;
+}
+
+.card-body {
+    padding: 25px;
+    margin-top: -15px;
+}
+
+.btn {
+    width: 100%;
+}
+
+.btn-outline-primary {
+    width: 50%;
+    color: var(--secondary-color-blue);
+    font-weight: bold;
+    border: none;
+    background-color: var(--main-color-green);
+}
