@@ -1,0 +1,15 @@
+.add-activity-section {
+    background-color: var(--main-color-green-lighter);
+}
+
+.btn-outline-success {
+    color: var(--secondary-color-white);
+    font-weight: bold;
+    border: none;
+    background-color: var(--color-background-site);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--main-color-green);
+    color: var(--secondary-color-blue);
+}

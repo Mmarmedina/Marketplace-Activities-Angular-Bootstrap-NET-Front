@@ -26,10 +26,15 @@
     width: 100%;
 }
 
-.btn-outline-primary {
-    width: 50%;
+.btn-outline-success {
+    width: 100%;
     color: var(--secondary-color-blue);
     font-weight: bold;
     border: none;
     background-color: var(--main-color-green);
+}
+
+.btn-outline-success:hover {
+    background-color: var(--main-color-green-lighter);
+    /* color: var(--secondary-color-white); */
 }

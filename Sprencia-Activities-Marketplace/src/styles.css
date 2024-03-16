@@ -3,6 +3,7 @@
 :root {
     --color-background-site: hsl(210, 4%, 18%);
     --main-color-green: hsl(151, 100%, 47%);
+    --main-color-green-lighter: hsl(151, 84%, 78%);
     --secondary-color-blue: hsl(199, 100%, 10%);
     --secondary-color-white: hsl(0, 0%, 100%);
     --secondary-color-grey: hsl(217, 7%, 77%);
@@ -11,3 +12,8 @@
 body {
     font-family: 'Open Sans', sans-serif !important;
 }
+
+/* * {
+    border: 1px black solid !important;
+} */
+
