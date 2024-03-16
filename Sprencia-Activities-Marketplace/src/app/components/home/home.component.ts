@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivitiesComponent } from '../activities/activities.component';
 
 @Component({
   selector: 'app-home',

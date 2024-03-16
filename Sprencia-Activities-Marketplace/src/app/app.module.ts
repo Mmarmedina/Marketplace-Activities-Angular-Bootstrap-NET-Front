@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { ActivitiesComponent } from './components/activities/activities.component';
 import { ActivityThumbnailComponent } from './components/activity-thumbnail/activity-thumbnail.component';
@@ -12,10 +13,11 @@ import { NavComponent } from './components/nav/nav.component';
 import { ReviewsActivityThumbnailComponent } from './components/reviews-activity-thumbnail/reviews-activity-thumbnail.component';
 import { ReviewsSprenciaComponent } from './components/reviews-sprencia/reviews-sprencia.component';
 import { ReviewsSprenciaThumbnailComponent } from './components/reviews-sprencia-thumbnail/reviews-sprencia-thumbnail.component';
-import { UpdateActivityComponent } from './components/update-activity/update-activity.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { NewActivityComponent } from './components/new-activity/new-activity.component';
 import { ReviewsActivityComponent } from './components/reviews-activity/reviews-activity.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormNewActivityComponent } from './components/form-new-activity/form-new-activity.component';
+import { FormUpdateActivityComponent } from './components/form-update-activity/form-update-activity.component';
 
 @NgModule({
   declarations: [
@@ -27,16 +29,18 @@ import { ReviewsActivityComponent } from './components/reviews-activity/reviews-
     FooterComponent,
     HomeComponent,
     NavComponent,
-    NewActivityComponent,
     ReviewsActivityComponent,
     ReviewsActivityThumbnailComponent,
     ReviewsSprenciaComponent,
     ReviewsSprenciaThumbnailComponent,
-    UpdateActivityComponent
+    FormNewActivityComponent,
+    FormUpdateActivityComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

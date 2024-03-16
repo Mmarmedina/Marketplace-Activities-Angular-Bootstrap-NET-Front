@@ -1,11 +1,28 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
+import { Activity } from '../interfaces/activity.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivitiesService {
 
-  constructor() { }
+  private baseUrl: string;
 
-  // Este es el servicio de actividades
+  constructor(private httpClient: HttpClient) {
+    this.baseUrl = 'http://localhost:5062/api/Activity/';
+  }
+
+  getAll(): Promise<Activity[]> {
+    const response = lastValueFrom(this.httpClient.get<Activity[]>(this.baseUrl))
+    return response;
+  }
+
+  getById (pId: number): Promise<Activity>{
+    const response = lastValueFrom(this.httpClient.get<Activity>(this.baseUrl + pId))
+    return response;
+  }
+
+  // create ()
 }
