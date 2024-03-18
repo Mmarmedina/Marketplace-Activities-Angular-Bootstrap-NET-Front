@@ -10,18 +10,5 @@ import { Activity } from '../../interfaces/activity.interface';
 
 export class ActivitiesComponent {
 
-  activities: Activity[];
-
-  constructor(private activitiesService: ActivitiesService){
-    this.activities = []
-  }
-
-  ngOnInit(): void {
-    this.activitiesService.getAll()
-      .then((response) => {
-        this.activities = response;
-        console.log(this.activities);
-      })
-      .catch(() => {})
-  }
+  
 }

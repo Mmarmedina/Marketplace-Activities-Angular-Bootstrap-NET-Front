@@ -15,10 +15,19 @@ export class ActivityViewComponent {
     
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
       const id = parseInt(params.idactivity);
       this.activity = await this.activitiesService.getById(params.idactivity);
+      console.log (this.activity);
     })
   }
+
+  // MMM ngOnInit(): void {
+  //   this.activatedRoute.params.subscribe(async (params: any) => {
+  //     const id = parseInt(params.idactivity);
+  //     this.activity = await this.activitiesService.getById(params.idactivity);
+  //     console.log (this.activity);
+  //   })
+  // }
 }
