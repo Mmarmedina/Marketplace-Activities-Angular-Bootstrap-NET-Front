@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ActivitiesService } from '../../services/activities.service';
+import { Component, Input } from '@angular/core';
 import { Activity } from '../../interfaces/activity.interface';
 
 @Component({
@@ -7,34 +6,27 @@ import { Activity } from '../../interfaces/activity.interface';
   templateUrl: './activity-thumbnail.component.html',
   styleUrl: './activity-thumbnail.component.css'
 })
+
 export class ActivityThumbnailComponent {
 
-  activities: Activity []
+  @Input () activity: Activity;
 
-  constructor(private activitiesService: ActivitiesService) {
-    this. activities = [];
-  }
-  
-  ngOnInit() {
-    this.activitiesService.getAll()
-      .then((response) => {
-        this.activities = response;
-        console.log(this.activities);
-      })
-      .catch((reject) => { })   
-  }
-
-   // async ngOnInit() {
-
-  //   MMM Con await no funciona
-  //   const response = await this.activitiesService.getAll();
-  //   console.log (response); 
-  // }
-
-  
-  
-
+  constructor() {
+    this.activity = {
+      id: 0,
+      title: "",
+      description: "",
+      price: 0,
+      schedule: [],
+      review: []
+      }
+    };    
 }
+
+  
+  
+
+
 
 
 

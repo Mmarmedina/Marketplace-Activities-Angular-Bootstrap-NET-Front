@@ -8,11 +8,13 @@ import { ActivitiesService } from '../../services/activities.service';
   templateUrl: './activity-view.component.html',
   styleUrl: './activity-view.component.css'
 })
+
 export class ActivityViewComponent {
   activity: Activity | undefined;
   
-  constructor(private activatedRoute: ActivatedRoute, private activitiesService: ActivitiesService){
-    
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private activitiesService: ActivitiesService){
   }
 
   async ngOnInit() {
@@ -22,12 +24,4 @@ export class ActivityViewComponent {
       console.log (this.activity);
     })
   }
-
-  // MMM ngOnInit(): void {
-  //   this.activatedRoute.params.subscribe(async (params: any) => {
-  //     const id = parseInt(params.idactivity);
-  //     this.activity = await this.activitiesService.getById(params.idactivity);
-  //     console.log (this.activity);
-  //   })
-  // }
 }

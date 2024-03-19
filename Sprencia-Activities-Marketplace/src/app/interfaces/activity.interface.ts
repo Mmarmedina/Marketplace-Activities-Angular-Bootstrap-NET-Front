@@ -6,6 +6,6 @@ export interface Activity {
     title: string,
     description: string,
     price: number,
-    schedule: Schedule,
-    review: Review
+    schedule: Schedule[],
+    review: Review[]
 }

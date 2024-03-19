@@ -1,40 +1,66 @@
-.text {
-    line-height: 1.7rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-decoration: none;
-}
-
-.card-img-top {
-    /* border-radius: 10px; */
-    padding: 20px;
-    cursor: pointer;
-}
-
 .card {
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
     height: 100%;
 }
+.card-img-top {
+    padding: 20px;
+    cursor: pointer;
+}
 
 .card-body {
-    padding: 25px;
-    margin-top: -15px;
+    padding: 1.7rem;
+    margin-top: -1rem;
+    height: 14rem;
 }
 
-.btn {
-    width: 100%;
+.text-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-decoration: none;
+    line-height: 1.7rem;
+    max-height: 1.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.btn-outline-success {
-    width: 100%;
+.text-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+   
+}
+
+.text-schedule {
+    font-size: 0.7rem;
+    font-weight: lighter;
+}
+
+span.btn-outline-dark:hover {
+    background-color: var(--secondary-color-blue);
+}
+
+button.btn-outline-success {
+    width: auto;
     color: var(--secondary-color-blue);
     font-weight: bold;
     border: none;
     background-color: var(--main-color-green);
+    margin-left: 1.5rem;
 }
 
-.btn-outline-success:hover {
+button.btn-outline-success:hover {
     background-color: var(--main-color-green-lighter);
-    /* color: var(--secondary-color-white); */
 }
+
+i.edit-button{
+    font-size: 1.5rem;
+    margin-right: 1.4rem;
+    color: var(--secondary-color-blue);
+}
+
+
+  
