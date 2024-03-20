@@ -41,39 +41,18 @@ export class FormNewActivityComponent {
 
     // MMM Selección o deselección de un horario. Si el checkbox asociado al horario está marcado, el horario se agrega al array selectedSchedules. Si el checkbox se desmarca, el horario se elimina del array selectedSchedules.
 
-    updateSelectedSchedules (checked: boolean, schedule: Schedule){
-      
+    updateSelectedSchedules (event: Event, schedule: Schedule){
       // MMM Si se marca el check de un horario, el horario seleccionado (schedule, con sus propiedades id y name), se añaden al array selectedSchedules.
-      if(checked) {
+
+      const checkbox = event.target as HTMLInputElement;
+
+      if(checkbox.checked) {
         this.selectedSchedules.push(schedule);
       }else {
         this.selectedSchedules = this.selectedSchedules.filter(item => item.id !== schedule.id);
       }
       console.log(this.selectedSchedules);
     }
-
-    // updateSelectedSchedules (event: Event, schedule: Schedule){
-    //   const checkbox = event.target as HTMLInputElement;
-    //   // MMM Si se marca el check de un horario, el horario seleccionado (schedule, con sus propiedades id y name), se añaden al array selectedSchedules.
-    //   if(checkbox.checked) {
-    //     this.selectedSchedules.push(schedule);
-    //   }else {
-    //     this.selectedSchedules = this.selectedSchedules.filter(item => item.id !== schedule.id);
-    //   }
-    //   console.log(this.selectedSchedules);
-    // }
-
-    // updateSelectedSchedules (checked: number, schedule: Schedule){
-    //   // MMM Si se marca el check de un horario, el horario seleccionado (schedule, con sus propiedades id y name), se añaden al array selectedSchedules.
-    //   if(checked) {
-    //     this.selectedSchedules.push(schedule);
-    //   }else {
-    //     this.selectedSchedules = this.selectedSchedules.filter(item => item.id !== schedule.id);
-    //   }
-    //   console.log(this.selectedSchedules);
-    // }
-
-    
 
     // MMM Se hace una petición al servicio para que ejecute el método create, el cual sirve para hacer una solicitud de inserción de una nueva actividad en BBDD.
     async onSubmit() {
