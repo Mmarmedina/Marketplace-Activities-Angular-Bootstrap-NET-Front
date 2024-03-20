@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { Activity } from '../interfaces/activity.interface';
 
@@ -15,14 +15,18 @@ export class ActivitiesService {
   }
 
   getAll(): Promise<Activity[]> {
-    const response = lastValueFrom(this.httpClient.get<Activity[]>(this.baseUrl))
+    const response = lastValueFrom(this.httpClient.get<Activity[]>(this.baseUrl));
     return response;
   }
 
   getById (pId: number): Promise<Activity>{
-    const response = lastValueFrom(this.httpClient.get<Activity>(this.baseUrl + pId))
+    const response = lastValueFrom(this.httpClient.get<Activity>(this.baseUrl + pId));
     return response;
   }
 
-  // create ()
+  create (pNewActivityForm: Activity): Promise<Activity> {
+    const endpointNewActivity = this.baseUrl + 'NewActivity';
+    const response = lastValueFrom(this.httpClient.post<Activity>(endpointNewActivity, pNewActivityForm));
+    return response;
+  }
 }

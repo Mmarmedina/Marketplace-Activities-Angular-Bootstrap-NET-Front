@@ -1,1 +1,92 @@
-<p>form-new-activity works!</p>
+
+<header>
+    <h1 class="text-center my-5 fw-bold">Añadir una nueva actividad</h1>
+</header>
+<section class="container w-75 mb-5">
+    <form class="d-flex flex-column p-5" [formGroup]="newActivityForm" (ngSubmit)="onSubmit()">
+        <div class="field mb-3">
+            <label for="title" class="d-block fw-bold mb-2" for="title">Título</label>
+            <input class="mb-2 p-2 w-100" id="title" name="title" type="text" formControlName="title">
+            <p class="error"
+                *ngIf="checkError ('title', 'required')">Debes escribir el título de la actividad (entre 25 y 130 caracteres).
+            </p>
+            <p class="error"
+                *ngIf="checkError ('title', 'minlength')">Debes escribir el título de la actividad  (entre 25 y 130 caracteres).
+            </p>
+            <p class="error"
+            *ngIf="checkError ('title', 'maxlength')">Debes escribir el título de la actividad  (entre 25 y 130 caracteres).
+            </p>
+        </div>
+        <div class="field mb-3">
+            <label for="text" class="fw-bold d-block mb-2" for="text">Descripción de la actividad</label>
+            <textarea class="mb-2 p-2 w-100 height-input" id="text" name="description" formControlName="description"></textarea>
+            <p class="error"
+                *ngIf="checkError ('description', 'required')">Debes escribir en qué consiste la actividad aquí (al menos 100 caracteres).
+            </p>
+            <p class="error"
+                *ngIf="checkError ('description', 'minlength')">Debes escribir en qué consiste la actividad aquí(al menos 100 caracteres). 
+            </p>                    
+        </div>
+        <div class="field mb-3">
+            <p class="fw-bold d-block">Horarios</p>
+            <div class="mb-2 p-2">
+                <div *ngFor="let schedule of allSchedules">
+                    <label [for]="schedule.name">
+                        <input type="checkbox" [id]="schedule.name" [name]="schedule.name" formControlName="schedule" (change)= "updateSelectedSchedules($event.target.checked, schedule)">
+                        {{ schedule.name }}
+                    </label>
+                </div>
+            </div>
+            <p class="error" 
+                *ngIf="checkError ('schedule', 'required')">Indica los horarios de la nueva actividad.
+            </p>
+        </div>
+        <button class="btn btn-outline-warning my-3 fw-bold w-50" type="submit" [disabled]="newActivityForm.invalid">Crear actividad</button>
+    </form>
+</section>
+
+
+<!-- <div class="field mb-3">
+    <p class="fw-bold d-block">Horarios</p>
+    <div class="mb-2 p-2">
+        <div *ngFor="let schedule of allSchedules">
+            <label [for]="schedule.name">
+                <input type="checkbox" [id]="schedule.name" [name]="schedule.name" [value]="schedule.id" formControlName="schedule" (change)= "updateSelectedSchedules($event.target.checked, schedule)">
+                {{ schedule.name }}
+            </label>
+        </div>
+    </div>
+    <p class="error" 
+        *ngIf="checkError ('schedule', 'required')">Indica los horarios de la nueva actividad.
+    </p>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- {
+    "title": "string",
+    "description": "string", -- 
+    "price": 0, - <input> de tipo text y validar la entrada del usuario con expresiones regulares para garantizar que cumpla con el formato de precio deseado.
+    "schedule": [ - select
+      0
+    ]
+
+    botón de enviar
+} -->
+
