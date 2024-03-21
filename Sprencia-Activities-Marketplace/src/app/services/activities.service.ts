@@ -29,4 +29,12 @@ export class ActivitiesService {
     const response = lastValueFrom(this.httpClient.post<Activity>(endpointNewActivity, pNewActivityForm));
     return response;
   }
+
+  // MMM No sé cómo hacer esto si la actividad se elimina.
+  delete (pId: number): Promise<Activity>{    
+    const response = lastValueFrom(this.httpClient.delete<Activity>(this.baseUrl + pId));
+    return response;  
+
+    // 
+  }
 }

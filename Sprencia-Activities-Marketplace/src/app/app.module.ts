@@ -18,6 +18,7 @@ import { ReviewsActivityComponent } from './components/reviews-activity/reviews-
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormNewActivityComponent } from './components/form-new-activity/form-new-activity.component';
 import { FormUpdateActivityComponent } from './components/form-update-activity/form-update-activity.component';
+import { FormDeleteActivityComponent } from './components/form-delete-activity/form-delete-activity.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FormUpdateActivityComponent } from './components/form-update-activity/f
     ReviewsSprenciaComponent,
     ReviewsSprenciaThumbnailComponent,
     FormNewActivityComponent,
-    FormUpdateActivityComponent
+    FormUpdateActivityComponent,
+    FormDeleteActivityComponent
   ],
   imports: [
     BrowserModule,

@@ -7,5 +7,5 @@ export class ReviewsService {
 
   constructor() { }
 
-  // Este es el servicio de opiniones
+  
 }
