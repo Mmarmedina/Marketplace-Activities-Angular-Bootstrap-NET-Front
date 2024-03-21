@@ -27,7 +27,8 @@ export class FormNewActivityComponent {
       this.newActivityForm = new FormGroup({
         title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
         description: new FormControl('', [Validators.required, Validators.minLength(100)]), 
-        price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
+        price: new FormControl('', [Validators.required]), 
+        // price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
         schedule: new FormControl('', [Validators.requiredTrue]),
       },[])
 
@@ -57,7 +58,7 @@ export class FormNewActivityComponent {
     
     }
 
-    // El valor del FormControl Schedule se debe actualizar antes de hacer la petición de inserción al back, de manera que se incluyan solo los horarios seleccionados.
+    // MMM El valor del FormControl Schedule se debe actualizar antes de hacer la petición de inserción al back, de manera que se incluyan solo los horarios seleccionados.
     updateFormControlScheduleValue(selectedSchedules: number []) {
         this.newActivityForm.get('schedule')?.setValue(this.selectedSchedules);
     }
@@ -71,6 +72,7 @@ export class FormNewActivityComponent {
       console.log (this.newActivityForm.value);
     }
 
+    // MMM Método para mostrar el mensaje de error cuando no se rellena correctamente el campo.
     checkError (control: string, error: string) {
       if (this.newActivityForm.get(control)?.hasError(error) && this.newActivityForm.get(control)?.touched) {
         return true

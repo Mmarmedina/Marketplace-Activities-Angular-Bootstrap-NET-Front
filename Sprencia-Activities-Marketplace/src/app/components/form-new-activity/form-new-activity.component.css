@@ -1,0 +1,18 @@
+input, textarea {
+    border-radius: 0.2rem;
+    border: transparent;
+    background-color: var(--secondary-color-grey-lighter);
+}
+
+button.btn-outline-success {
+    width: auto;
+    color: var(--secondary-color-blue);
+    font-weight: bold;
+    border: none;
+    background-color: var(--main-color-green);
+    margin-left: 1.5rem;
+}
+
+button.btn-outline-success:hover {
+    background-color: var(--main-color-green-lighter);
+}
