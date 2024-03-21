@@ -27,8 +27,8 @@ export class FormNewActivityComponent {
       this.newActivityForm = new FormGroup({
         title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
         description: new FormControl('', [Validators.required, Validators.minLength(100)]), 
-        price: new FormControl('', [Validators.required, Validators.pattern(/^-?\d*[.,]?\d{0,2}$/)]), 
-        schedule: new FormControl(this.selectedSchedules, []),
+        price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
+        schedule: new FormControl('', [Validators.requiredTrue]),
       },[])
 
       this.getAllSchedules();
@@ -40,11 +40,9 @@ export class FormNewActivityComponent {
       console.log (this.allSchedules);
     }
 
-    // MMM Selección o deselección de un horario. Si el checkbox asociado al horario está marcado, el horario se agrega al array selectedSchedules. Si el checkbox se desmarca, el horario se elimina del array selectedSchedules. El método devuelve un array de enteros con los IDs de los horarios seleccionados al crear la actividad.
-
-    updateSelectedSchedules (event: Event, schedule: Schedule): number []{
-      // MMM Si se marca el check de un horario se dispara evento change y checkbox seleccionado toma valor true. Cuando esto sucede entra en el if, y el objeto con los datos del horario seleccionado (schedule) se añade al array selectedSchedules.
-      // Si se desmarca el checbox, entra en el else (porque su valor no es true). Se filtra el array que se compone de los elementos seleccionados y deja todos los objetos (schedule) que sean distintos al desmarcado. 
+    // MMM Si se marca el check de un horario se dispara evento change y checkbox seleccionado toma valor true. Cuando esto sucede entra en el if, y el objeto con los datos del horario seleccionado (schedule) se añade al array selectedSchedules.
+    // Si se desmarca el checbox, entra en el else (porque su valor no es true). Se filtra el array que se compone de los elementos seleccionados y deja todos los objetos (schedule) que sean distintos al desmarcado.
+    updateSelectedSchedules (event: Event, schedule: Schedule): number []{     
 
       const checkbox = event.target as HTMLInputElement;
 
@@ -59,28 +57,15 @@ export class FormNewActivityComponent {
     
     }
 
-
-    // updateSelectedSchedules (event: Event, schedule: Schedule){
-    //   // MMM Si se marca el check de un horario se dispara evento change y checkbox seleccionado toma valor true. Cuando esto sucede entra en el if, y el objeto con los datos del horario seleccionado (schedule) se añade al array selectedSchedules.
-    //   // Si se desmarca el checbox, entra en el else (porque su valor no es true). Se filtra el array que se compone de los elementos seleccionados y deja todos los objetos (schedule) que sean distintos al desmarcado. 
-
-    //   const checkbox = event.target as HTMLInputElement;
-
-    //   if(checkbox.checked) {
-    //     this.selectedSchedules.push(schedule);
-    //   }else {
-    //     this.selectedSchedules = this.selectedSchedules.filter(item => item.id !== schedule.id);
-    //   }
-
-    //   console.log(this.selectedSchedules);
-    //   return this.selectedSchedules;
-      
-    // }
-    
-
+    // El valor del FormControl Schedule se debe actualizar antes de hacer la petición de inserción al back, de manera que se incluyan solo los horarios seleccionados.
+    updateFormControlScheduleValue(selectedSchedules: number []) {
+        this.newActivityForm.get('schedule')?.setValue(this.selectedSchedules);
+    }
 
     // MMM Se hace una petición al servicio para que ejecute el método create, el cual sirve para hacer una solicitud de inserción de una nueva actividad en BBDD.
     async onSubmit() {
+      this.updateFormControlScheduleValue(this.selectedSchedules);
+      console.log (this.newActivityForm.value);
       const response = await this.activitiesService.create(this.newActivityForm.value);
       console.log (response);
       console.log (this.newActivityForm.value);
@@ -94,3 +79,6 @@ export class FormNewActivityComponent {
       }
     } 
 }
+
+
+    
