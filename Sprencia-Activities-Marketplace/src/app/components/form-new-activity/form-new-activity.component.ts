@@ -67,8 +67,18 @@ export class FormNewActivityComponent {
     async onSubmit() {
       this.updateFormControlScheduleValue(this.selectedSchedules);
       console.log (this.newActivityForm.value);
-      const response = await this.activitiesService.create(this.newActivityForm.value);
-      console.log (response);
+
+      // try - catch. 
+      try {
+        const response = await this.activitiesService.create(this.newActivityForm.value);
+        console.log (response);
+        // alert
+        // Route Navigate
+      } catch (error) {
+        // alerta en caso de error
+      }
+      
+      
       console.log (this.newActivityForm.value);
     }
 
