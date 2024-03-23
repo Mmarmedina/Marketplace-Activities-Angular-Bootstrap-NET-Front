@@ -17,10 +17,18 @@ const routes: Routes = [
   { path: 'eliminar-actividad/:idactivity', component: FormDeleteActivityComponent},
   { path: 'contacto', component: ContactComponent},
   { path: '**', redirectTo: '/home'}
+
 ];
 
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled' })],
   exports: [RouterModule]
 })
+
+
 export class AppRoutingModule { }

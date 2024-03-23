@@ -42,7 +42,7 @@ import { FormDeleteActivityComponent } from './components/form-delete-activity/f
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
