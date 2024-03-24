@@ -1,7 +1,22 @@
-.author-img {
-    border-radius: 20%;
+.user-img {
+    max-height: 5rem;
+    max-width: 5rem;
 }
 
-.reviews-section {
-    height: 20rem;
+button.btn-outline-success {
+    height: 2.5rem;
+    color: var(--secondary-color-blue);
+    font-weight: bold;
+    font-size: 0.9rem;
+    font-family: 'Poppins';
+    border: none;
+    background-color: var(--main-color-green);
+}
+
+button.btn-outline-success:hover {
+    background-color: var(--main-color-green-lighter);
+}
+
+.bloque {
+    height: 16rem;
 }

@@ -1,11 +1,19 @@
 <div class="container w-75">
-    <header class="row">
-      <div class="col">
+    <header class="row d-flex justify-content-between align-items-center mb-2">
+      <div class="col-12 col-lg-8">
           <h1 class="h2 fw-bold mt-4">Charlas sobre nutrición y salud (título)</h1>
           <p>Aprende a capturar momentos especiales y a manejar una cámara de forma básica. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque debitis, iste modi incidunt necessitatibus expedita eum.</p>
+          <div class="d-flex flex-column justify-content-center align-items-center d-xl-none">
+            <p class="h2 fw-bold text-center w-75">10.95 €</p>
+            <button class="btn btn-outline-success w-75">Ver disponibilidad</button>
+          </div>
+      </div>
+      <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center d-none d-xl-block">
+        <p class="h2 fw-bold text-end w-75">10.95 €</p>
+        <button class="btn btn-outline-success w-75">Ver disponibilidad</button>
       </div>
     </header>
-    <section>
+    <div>
         <div class="row">
             <div class="col mb-2">
                 <i class="bi bi-chat-dots"><span class="mx-2">10 opiniones</span></i>
@@ -16,7 +24,7 @@
                 <img class="img-fluid my-2 rounded" src="assets\img\pic-post-view.jpg" alt="img-activity">
             </div>
         </div>
-    </section>         
+    </div>         
     <aside class="row">
         <div class="col-6 d-md-none">Sidebar en movil
         </div>
@@ -54,37 +62,32 @@
                 <h2 class="h6 fw-bold my-2">Precios</h2>
                 <p>El precio de esta actividad es de: 10,90 euros.</p>
               </div>
-              <p id="description">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est magni ut repellat deserunt saepe, esse vitae quaerat hic ad quasi molestiae eaque placeat? Fugiat obcaecati est repudiandae reprehenderit, sit eos!
-                Totam exercitationem accusantium quis cupiditate corporis ducimus? Placeat impedit voluptatum cumque quas hic at beatae animi odio est ea aliquam nulla eligendi culpa, inventore omnis, dolor aspernatur nam voluptas soluta?
-                Velit modi quia quas, assumenda excepturi iure, blanditiis asperiores eveniet cumque aliquid voluptate voluptatum, esse nemo harum tenetur pariatur. Repudiandae itaque deserunt libero distinctio quo veritatis deleniti quas odio. Nemo.
-                Quo voluptas cum temporibus magnam fugiat quos a corrupti suscipit ullam repudiandae mollitia placeat, qui quibusdam cupiditate architecto porro, nihil natus totam veritatis. Laborum labore aut magni ipsam soluta aperiam.
-                Harum excepturi porro dolorum magnam unde odio quibusdam omnis. Dolorem, ex molestiae consequatur omnis sint vel obcaecati dolorum sit accusantium? Numquam quis doloremque adipisci possimus ut porro dolorum quisquam ullam.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est magni ut repellat deserunt saepe, esse vitae quaerat hic ad quasi molestiae eaque placeat? Fugiat obcaecati est repudiandae reprehenderit, sit eos!
-              </p>
-
-              <section>
-                <div class="container reviews-section">
-                  <div class="d-flex d-colum">
-                    <img class="me-2 author-img" src="" alt="author-review">
-                     <p class="h6 fw-bold">FRANCISCO JAVIER</p>
-                    </div>                 
+              <h2 class="h6 fw-bold my-2">Opiniones</h2>                    
+              <section id="reviews" class="d-flex flex-column border border-secondary rounded px-4 my-4">
+                <div class="d-flex align-items-center">
+                  <img class="user-img" src="assets\img\user-logo.png" alt="user-img">
+                  <p class="h6 fw-bold w-100">María Martín</p>
+                  <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+                </div>
+                <div class="d-flex flex-column">                  
+                  <p>Harum excepturi porro dolorum magnam unde odio quibusdam omnis. Dolorem, ex molestiae consequatur omnis sint vel obcaecati dolorum sit accusantium? Numquam quis doloremque adipisci possimus ut porro</p>
+                  <p>Publicado el 10 de marzo de 2024</p>
                 </div>
               </section>
-
-            
-            
-            
-            
-            
-            
-            
-
+              <section id="reviews" class="d-flex flex-column border border-secondary rounded px-4 my-4">
+                <div class="d-flex align-items-center">
+                  <img class="user-img" src="assets\img\user-logo.png" alt="user-img">
+                  <p class="h6 fw-bold w-100">María Martín</p>
+                  <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+                </div>
+                <div class="d-flex flex-column">                  
+                  <p>Harum excepturi porro dolorum magnam unde odio quibusdam omnis. Dolorem, ex molestiae consequatur omnis sint vel obcaecati dolorum sit accusantium? Numquam quis doloremque adipisci possimus ut porro</p>
+                  <p>Publicado el 10 de marzo de 2024</p>
+                </div>
+              </section>    
         </div>
         <div class="col-4 d-none d-md-block">sidebar
         </div>
-    </main>
-    
-
+    </main>   
 </div>
 
