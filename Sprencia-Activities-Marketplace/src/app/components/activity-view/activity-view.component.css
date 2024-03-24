@@ -4,7 +4,7 @@
 }
 
 button.btn-outline-success {
-    height: 2.5rem;
+    height: auto;
     color: var(--secondary-color-blue);
     font-weight: bold;
     font-size: 0.9rem;
@@ -17,6 +17,27 @@ button.btn-outline-success:hover {
     background-color: var(--main-color-green-lighter);
 }
 
-.bloque {
-    height: 16rem;
+.purchase-section {
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+}
+
+.text-title-purchase-section {
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;    
+}
+
+.text-number-reviews-purchase-section {
+    font-size: 0.8rem;
+    font-style: italic;
+    
+}
+
+.text-schedule {
+    font-size: 0.7rem;
+    font-weight: lighter;
 }

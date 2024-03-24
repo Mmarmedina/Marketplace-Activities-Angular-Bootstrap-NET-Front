@@ -1,40 +1,60 @@
 <div class="container w-75">
     <header class="row d-flex justify-content-between align-items-center mb-2">
       <div class="col-12 col-lg-8">
-          <h1 class="h2 fw-bold mt-4">Charlas sobre nutrición y salud (título)</h1>
-          <p>Aprende a capturar momentos especiales y a manejar una cámara de forma básica. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque debitis, iste modi incidunt necessitatibus expedita eum.</p>
+          <h1 class="h2 fw-bold mt-4">{{activity?.title}}</h1>
+          <p>{{activity?.description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque debitis, iste modi incidunt necessitatibus expedita eum.</p>
           <div class="d-flex flex-column justify-content-center align-items-center d-xl-none">
-            <p class="h2 fw-bold text-center w-75">10.95 €</p>
+            <p class="h2 fw-bold text-center w-75">{{activity?.price}}</p>
             <button class="btn btn-outline-success w-75">Ver disponibilidad</button>
           </div>
       </div>
       <div class="col-lg-3 d-flex flex-column justify-content-center align-items-center d-none d-xl-block">
-        <p class="h2 fw-bold text-end w-75">10.95 €</p>
+        <p class="h2 fw-bold text-end w-75">{{activity?.price}} €</p>
         <button class="btn btn-outline-success w-75">Ver disponibilidad</button>
       </div>
     </header>
     <div>
         <div class="row">
             <div class="col mb-2">
-                <i class="bi bi-chat-dots"><span class="mx-2">10 opiniones</span></i>
+                <i class="bi bi-chat-dots"><span class="text-number-reviews-purchase-section mx-2">10 opiniones</span></i>
             </div>
         </div>
         <div class="row">
-            <div class="col mb-4">
+            <div class="col mb-2">
                 <img class="img-fluid my-2 rounded" src="assets\img\pic-post-view.jpg" alt="img-activity">
             </div>
         </div>
     </div>         
-    <aside class="row">
-        <div class="col-6 d-md-none">Sidebar en movil
-        </div>
-    </aside>
-    <main class="row" >
-        <div class="col-md-8">
+    <section class="row mx-4 my-2">
+      <div id="purchase-section-tablet-mobile" class="d-lg-none d-flex flex-column align-items-start border border-secondary rounded purchase-section p-3 my-2">
+        <h2 class="text-title-purchase-section">{{activity?.title}}</h2>
+        <div class="row d-flex">
+          <div class="col-auto pe-0 mb-3">
+            <i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i>
+          </div>
+          <div class="col-auto">
+            <i class="bi bi-chat-dots"></i><span class="text-number-reviews-purchase-section"> 10 opiniones</span>                 
+          </div>
+       </div>
+       <div>
+        <p class="h6 fw-bold">Selecciona el horario</p>
+        <span class="btn btn-outline-dark btn-sm me-2 mt-2 mb-3">
+        <span class="text-schedule">Mañana</span>
+        </span>
+      <span class="btn btn-outline-dark btn-sm me-2 mt-2 mb-3">
+        <span class="text-schedule">Tarde</span>
+      </span>
+       </div>         
+        <p class="h4 fw-bold d-inline-block my-3 text-end">10.95 €</p>
+      <button class="btn btn-outline-success w-100">Comprar</button>         
+      </div>
+    </section>
+    <main class="row">
+        <div class="col-lg-8">
             <nav class="navbar navbar-expand-lg navbar-light border-bottom border-secondary">
                 <div>
                   <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active ms-2">
+                    <li class="nav-item active">
                       <a class="nav-link" [href]="'#description'"><i class="bi bi-file-text"></i> Detalles</a>
                     </li>
                     <li class="nav-item active ms-2">
@@ -49,20 +69,24 @@
                   </ul>
                 </div>
               </nav>
-              <div id="description" class="my-3 card-info">
+              <div id="description" class="mt-3 mb-4 card-info">
                 <h2 class="h6 fw-bold my-2">En qué consiste la actividad</h2>
-                <p>Aprende a capturar momentos especiales y a manejar una cámara de forma básica. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque debitis, iste modi incidunt necessitatibus expedita eum.</p>
+                <p>{{activity?.description}}</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque debitis, iste modi incidunt necessitatibus expedita eum. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque debitis, iste modi incidunt necessitatibus expedita eum.</p>
                 <p>Ab animi, quidem laborum architecto, delectus excepturi magnam suscipit, alias mollitia velit ullam vitae dolores. Minima, ab enim! Repellat facilis beatae provident vel consectetur, eos saepe! Facere nisi fugit laborum.Cum aut aspernatur doloribus tenetur maiores, repudiandae neque recusandae magni vel rem temporibus sequi, quod.</p>
               </div>
-              <div id="schedule" class="my-3">
-                <h2 class="h6 fw-bold my-2">Horarios</h2>
-                <p>Esta actividad está diponible en horario de mañana, tarde y fin de semana.</p>
+              <div id="schedule" class="mt-3 mb-4">
+                <h2 class="h6 fw-bold mt-2">Horarios</h2>
+                <p>Puedes apuntarte a esta actividad en los siguientes horarios: </p>                
+                <span class="btn btn-outline-dark btn-sm me-2" *ngFor="let schedule of activity?.schedule">
+                  <span class="text-schedule">{{ schedule.name }}</span>
+                </span>
               </div>
-              <div id="price" class="my-3">
+              <div id="price" class="mt-3 mb-4">
                 <h2 class="h6 fw-bold my-2">Precios</h2>
-                <p>El precio de esta actividad es de: 10,90 euros.</p>
+                <p>El precio de esta actividad es de {{activity?.price}} euros.</p>
               </div>
-              <h2 class="h6 fw-bold my-2">Opiniones</h2>                    
+              <h2 class="h6 fw-bold my-3 mb-4">Opiniones</h2>                    
               <section id="reviews" class="d-flex flex-column border border-secondary rounded px-4 my-4">
                 <div class="d-flex align-items-center">
                   <img class="user-img" src="assets\img\user-logo.png" alt="user-img">
@@ -86,8 +110,29 @@
                 </div>
               </section>    
         </div>
-        <div class="col-4 d-none d-md-block">sidebar
-        </div>
+        <aside class="col-4 d-none d-lg-block sticky-top">
+          <div class="sticky-top">
+            <p class="h6 fw-bold">Selecciona el horario</p>
+            <span class="btn btn-outline-dark btn-sm me-2 mt-2 mb-3">
+              <span class="text-schedule">Mañana</span>
+            </span>
+            <span class="btn btn-outline-dark btn-sm me-2 mt-2 mb-3">
+              <span class="text-schedule">Tarde</span>
+            </span>
+            <section id="purchase-section-desktop" class="d-flex flex-column align-items-start border border-secondary rounded purchase-section p-3 mt-2">
+              <h2 class="text-title-purchase-section">{{activity?.title}}</h2>
+              <div class="row d-flex">
+                <div class="col-auto pe-0">
+                  <i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i>
+                </div>
+                <div class="col-auto">
+                  <i class="bi bi-chat-dots"></i><span class="text-number-reviews-purchase-section"> 10 opiniones</span>                 
+                </div>
+             </div>            
+            <p class="h4 fw-bold d-inline-block my-3 text-end">{{activity?.price}} €</p>
+            <button class="btn btn-outline-success w-100">Comprar</button>         
+            </section>
+          </div>          
+        </aside>
     </main>   
 </div>
-
