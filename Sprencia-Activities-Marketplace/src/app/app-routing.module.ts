@@ -6,7 +6,6 @@ import { ActivityViewComponent } from './components/activity-view/activity-view.
 import { ContactComponent } from './components/contact/contact.component';
 import { FormNewActivityComponent } from './components/form-new-activity/form-new-activity.component';
 import { FormUpdateActivityComponent } from './components/form-update-activity/form-update-activity.component';
-import { FormDeleteActivityComponent } from './components/form-delete-activity/form-delete-activity.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home'},
@@ -14,10 +13,8 @@ const routes: Routes = [
   { path: 'actividades/:idactivity', component: ActivityViewComponent},
   { path: 'nueva-actividad', component: FormNewActivityComponent},
   { path: 'editar-actividad/:idactivity', component: FormUpdateActivityComponent},
-  { path: 'eliminar-actividad/:idactivity', component: FormDeleteActivityComponent},
   { path: 'contacto', component: ContactComponent},
   { path: '**', redirectTo: '/home'}
-
 ];
 
 // @NgModule({
