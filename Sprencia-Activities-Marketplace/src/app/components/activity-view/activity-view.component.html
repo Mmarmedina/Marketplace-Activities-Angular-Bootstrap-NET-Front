@@ -54,14 +54,14 @@
             <nav class="navbar navbar-expand-lg navbar-light border-bottom border-secondary">
                 <div>
                   <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
+                    <li class="nav-item active ms-2 ms-lg-0">
                       <a class="nav-link" [href]="'#description'"><i class="bi bi-file-text"></i> Detalles</a>
                     </li>
                     <li class="nav-item active ms-2">
                       <a class="nav-link" [href]="'#schedule'"><i class="bi bi-alarm"></i> Horarios</a>
                     </li>
                     <li class="nav-item active ms-2">
-                        <a class="nav-link" [href]="'#price'"><i class="bi bi-wallet2"></i> Precios</a>
+                        <a class="nav-link" [href]="'#price'"><i class="bi bi-wallet2"></i> Precio</a>
                       </li>
                     <li class="nav-item ms-2">
                       <a class="nav-link" [href]="'#reviews'"><i class="bi bi-chat-dots"></i> Opiniones</a>
@@ -83,7 +83,7 @@
                 </span>
               </div>
               <div id="price" class="mt-3 mb-4">
-                <h2 class="h6 fw-bold my-2">Precios</h2>
+                <h2 class="h6 fw-bold my-2">Precio</h2>
                 <p>El precio de esta actividad es de {{activity?.price}} euros.</p>
               </div>
               <h2 class="h6 fw-bold my-3 mb-4">Opiniones</h2>                    
@@ -95,7 +95,7 @@
                 </div>
                 <div class="d-flex flex-column">                  
                   <p>Harum excepturi porro dolorum magnam unde odio quibusdam omnis. Dolorem, ex molestiae consequatur omnis sint vel obcaecati dolorum sit accusantium? Numquam quis doloremque adipisci possimus ut porro</p>
-                  <p>Publicado el 10 de marzo de 2024</p>
+                  <small class="fst-italic mb-3">Publicado el 10 de marzo de 2024</small>
                 </div>
               </section>
               <section id="reviews" class="d-flex flex-column border border-secondary rounded px-4 my-4">
@@ -106,7 +106,7 @@
                 </div>
                 <div class="d-flex flex-column">                  
                   <p>Harum excepturi porro dolorum magnam unde odio quibusdam omnis. Dolorem, ex molestiae consequatur omnis sint vel obcaecati dolorum sit accusantium? Numquam quis doloremque adipisci possimus ut porro</p>
-                  <p>Publicado el 10 de marzo de 2024</p>
+                  <small class="fst-italic mb-3">Publicado el 10 de marzo de 2024</small>
                 </div>
               </section>    
         </div>
