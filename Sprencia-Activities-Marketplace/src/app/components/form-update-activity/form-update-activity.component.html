@@ -42,7 +42,7 @@
                 <div class="mb-2 p-2">
                     <div *ngFor="let schedule of allSchedules">
                         <label class="small" [for]="schedule.name">
-                            <input type="checkbox" [id]="schedule.name" [name]="schedule.name" formControlName="schedule" (change)="updateSelectedSchedules($event, schedule)">
+                            <input type="checkbox" [id]="schedule.id" [name]="schedule.name" formControlName="schedule" (change)="updateSelectedSchedules($event, schedule, updateSchedules)">
                             {{schedule.name}}
                         </label>
                     </div>

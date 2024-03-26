@@ -70,8 +70,7 @@ export class FormNewActivityComponent {
       }
 
       console.log(this.selectedSchedules);
-      return this.selectedSchedules;
-    
+      return this.selectedSchedules;    
     }
 
     // MMM El valor del FormControl Schedule se debe actualizar antes de hacer la petición de inserción al back, de manera que se incluyan solo los horarios seleccionados.
