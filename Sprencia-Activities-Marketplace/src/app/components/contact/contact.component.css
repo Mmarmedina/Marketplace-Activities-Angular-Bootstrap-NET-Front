@@ -1,0 +1,35 @@
+.header-section {
+    background-color: var(--main-color-green);    
+}
+
+.title {
+    color: var(--secondary-color-blue);
+}
+
+.img-header-contact {
+    background: url('../../../assets/img/contact-Sprencia.jpg') bottom/cover;
+    height: 20rem;
+}
+
+i {
+    color: var(--secondary-color-blue);
+}
+
+.btn-outline-success {
+    color: var(--secondary-color-blue);
+    font-weight: bold;
+    border: none;
+    background-color: var(--main-color-green);
+}
+
+.btn-outline-success:hover {
+    background-color: var( --secondary-color-blue);
+    color: var(--secondary-color-white);
+}
+
+@media (min-width: 1024px) {
+    .w-md-50 {
+        width: 60% !important;
+    }
+}
+
