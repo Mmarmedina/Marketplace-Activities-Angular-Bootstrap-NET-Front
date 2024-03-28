@@ -1,0 +1,12 @@
+.user-img {
+    max-height: 5rem;
+    max-width: 5rem;
+}
+
+.review-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
