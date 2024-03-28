@@ -1,5 +1,7 @@
 export interface Review {
     id: number, 
-    reviewText: string,
-    activityId: number | null
+    reviewText: string,   
+    author: string,
+    date: Date,
+    activityId: number | null,
 }

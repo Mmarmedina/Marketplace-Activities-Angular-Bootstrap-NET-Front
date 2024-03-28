@@ -4,7 +4,7 @@
       <h2 class="text-title" [routerLink]="['/actividades', activity.id]">{{activity.title}}</h2>
       <p class="text-description" [routerLink]="['/actividades', activity.id]">{{activity.description}}</p>    
       <span class="btn btn-outline-dark btn-sm me-2 mt-2 mb-3" *ngFor="let schedule of activity.schedule">
-        <span class="text-schedule">{{ schedule.name }}</span>
+        <span class="text-schedule">{{schedule.name}}</span>
       </span>
       <p class="h5 fw-bold">{{activity.price}} €</p>
     </div>

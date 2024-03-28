@@ -9,4 +9,8 @@
     -webkit-line-clamp: 4;
     overflow: hidden;
     margin-bottom: 0.5rem;
+    min-height: 5.1rem;
 }
+
+
+
