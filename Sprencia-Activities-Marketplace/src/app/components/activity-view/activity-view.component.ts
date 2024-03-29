@@ -14,6 +14,7 @@ export class ActivityViewComponent {
   activity: Activity | undefined;
   reviewsActivity: Review[] | undefined;
   reviewDateTypeString: string;
+  numberOfReviews!: number | undefined;
 
   reviewsActivityFormatted: ReviewFormatted[] | undefined;
 
@@ -40,7 +41,9 @@ export class ActivityViewComponent {
       // Se crea un objeto tipo ReviewFormatted: es igual que Review pero con la fecha tipo string. 
       // El objetivo es poder pintar todos los datos de las opiniones de la actividad, incluida la fecha formateada.
       this.reviewsActivityFormatted = this.mapToReviewsActivityFormated(this.reviewsActivity || []);
-      console.log (this.reviewsActivityFormatted);  
+      console.log (this.reviewsActivityFormatted); 
+
+      this.numberOfReviews = this.getNumberOfReviews(this.reviewsActivity);
       
     })
   }
@@ -109,6 +112,12 @@ export class ActivityViewComponent {
 
   }
 
+  getNumberOfReviews (reviewsActivity: Review[] | undefined): number | undefined{
+    const numberOfReviews = reviewsActivity?.length;
+    return numberOfReviews;
+  }
+
 }
+
 
  
