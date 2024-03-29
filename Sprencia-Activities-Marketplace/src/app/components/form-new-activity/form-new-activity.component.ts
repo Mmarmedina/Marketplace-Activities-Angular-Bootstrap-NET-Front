@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivitiesService } from '../../services/activities.service';
+import { Router } from '@angular/router';
 import { SchedulesService } from '../../services/schedules.service';
 import { Schedule } from '../../interfaces/schedule.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-new-activity',
@@ -15,77 +17,99 @@ export class FormNewActivityComponent {
   allSchedules: Schedule[];
   selectedSchedules: number [];
 
-    constructor (
-      private activitiesService: ActivitiesService,
-      private schedulesService: SchedulesService ){
-        this.allSchedules = [];
-        this.selectedSchedules = [];
+
+  constructor (
+    private activitiesService: ActivitiesService,
+    private schedulesService: SchedulesService,
+    private router: Router ){
+      this.allSchedules = [];
+      this.selectedSchedules = [];
+  }
+
+  ngOnInit(): void {
+    this.newActivityForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(100)]), 
+      price: new FormControl('', [Validators.required]), 
+      // price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
+      schedule: new FormControl('', [Validators.requiredTrue]),
+    },[])
+
+    this.getAllSchedules();
+  }
+
+  // MMM Se hace una petición al servicio para que ejecute el método create, el cual sirve para hacer una solicitud de inserción de una nueva actividad en BBDD.
+  async onSubmit() {
+    this.updateFormControlScheduleValue(this.selectedSchedules);
+    console.log (this.newActivityForm.value);
+
+    try {
+      const response = await this.activitiesService.create(this.newActivityForm.value);
+      console.log (response);
+
+      // Mensaje de alerta
+      Swal.fire({
+        title: "La actividad se ha añadido correctamente",
+        width: 600,
+        padding: "3em",
+        color: " #fff;",
+        background: "#fff url()",
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("")
+          left top
+          no-repeat
+        `
+      });
+      // Redirigir a la home para ver que se ha añadido la actividad.      
+      this.router.navigate(['/home']);
+    } catch (error) {
+      // Mensaje de alerta en caso de error
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "La actividad no se ha podido añadir. Inténtalo de nuevo.",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+      this.router.navigate(['/nueva-actividad']);
+    }    
+    console.log (this.newActivityForm.value);
+  }
+
+  // MMM Petición al servicio de todos los horarios (entidad Schedules en BBDD) para pintar el checkbox con los horarios en los que podría realizarse la nueva actividad.
+  async getAllSchedules() {
+    this.allSchedules = await this.schedulesService.getAll();
+    console.log (this.allSchedules);
+  }
+
+  // MMM Si se marca el check de un horario se dispara evento change y checkbox seleccionado toma valor true. Cuando esto sucede entra en el if, y el objeto con los datos del horario seleccionado (schedule) se añade al array selectedSchedules.
+  // Si se desmarca el checbox, entra en el else (porque su valor no es true). Se filtra el array que se compone de los elementos seleccionados y deja todos los objetos (schedule) que sean distintos al desmarcado.
+  updateSelectedSchedules (event: Event, schedule: Schedule): number []{
+    const checkbox = event.target as HTMLInputElement;
+
+    if(checkbox.checked) {
+      this.selectedSchedules.push(schedule.id);
+    }else {
+      this.selectedSchedules = this.selectedSchedules.filter(item => item !== schedule.id);
     }
 
-    ngOnInit(): void {
-      this.newActivityForm = new FormGroup({
-        title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
-        description: new FormControl('', [Validators.required, Validators.minLength(100)]), 
-        price: new FormControl('', [Validators.required]), 
-        // price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
-        schedule: new FormControl('', [Validators.requiredTrue]),
-      },[])
+    console.log(this.selectedSchedules);
+    return this.selectedSchedules;    
+  }
 
-      this.getAllSchedules();
+  // MMM El valor del FormControl Schedule se debe actualizar antes de hacer la petición de inserción al back, de manera que se incluyan solo los horarios seleccionados.
+  updateFormControlScheduleValue(selectedSchedules: number []) {
+      this.newActivityForm.get('schedule')?.setValue(this.selectedSchedules);
+  }
+
+  // MMM Método para mostrar el mensaje de error cuando no se rellena correctamente el campo.
+  checkError (control: string, error: string) {
+    if (this.newActivityForm.get(control)?.hasError(error) && this.newActivityForm.get(control)?.touched) {
+      return true
+    }else {
+      return false
     }
-
-    // MMM Se hace una petición al servicio para que ejecute el método create, el cual sirve para hacer una solicitud de inserción de una nueva actividad en BBDD.
-    async onSubmit() {
-      this.updateFormControlScheduleValue(this.selectedSchedules);
-      console.log (this.newActivityForm.value);
-
-      // try - catch. 
-      try {
-        const response = await this.activitiesService.create(this.newActivityForm.value);
-        console.log (response);
-        // alert
-        // Route Navigate
-      } catch (error) {
-        // alerta en caso de error
-      }
-      
-      console.log (this.newActivityForm.value);
-    }
-
-    // MMM Petición al servicio de todos los horarios (entidad Schedules en BBDD) para pintar el checkbox con los horarios en los que podría realizarse la nueva actividad.
-    async getAllSchedules() {
-      this.allSchedules = await this.schedulesService.getAll();
-      console.log (this.allSchedules);
-    }
-
-    // MMM Si se marca el check de un horario se dispara evento change y checkbox seleccionado toma valor true. Cuando esto sucede entra en el if, y el objeto con los datos del horario seleccionado (schedule) se añade al array selectedSchedules.
-    // Si se desmarca el checbox, entra en el else (porque su valor no es true). Se filtra el array que se compone de los elementos seleccionados y deja todos los objetos (schedule) que sean distintos al desmarcado.
-    updateSelectedSchedules (event: Event, schedule: Schedule): number []{
-      const checkbox = event.target as HTMLInputElement;
-
-      if(checkbox.checked) {
-        this.selectedSchedules.push(schedule.id);
-      }else {
-        this.selectedSchedules = this.selectedSchedules.filter(item => item !== schedule.id);
-      }
-
-      console.log(this.selectedSchedules);
-      return this.selectedSchedules;    
-    }
-
-    // MMM El valor del FormControl Schedule se debe actualizar antes de hacer la petición de inserción al back, de manera que se incluyan solo los horarios seleccionados.
-    updateFormControlScheduleValue(selectedSchedules: number []) {
-        this.newActivityForm.get('schedule')?.setValue(this.selectedSchedules);
-    }
-    
-    // MMM Método para mostrar el mensaje de error cuando no se rellena correctamente el campo.
-    checkError (control: string, error: string) {
-      if (this.newActivityForm.get(control)?.hasError(error) && this.newActivityForm.get(control)?.touched) {
-        return true
-      }else {
-        return false
-      }
-    } 
+  } 
 }
 
 
