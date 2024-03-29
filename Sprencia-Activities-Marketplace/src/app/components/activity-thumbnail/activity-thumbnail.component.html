@@ -16,7 +16,7 @@
       <a title="update-activity" class="edit-button" [routerLink]="['/editar-actividad', activity.id]">
         <i class="bi bi bi-pencil edit-button"></i>
       </a>
-      <a title="delete-activity" class="edit-button" [routerLink]="['/eliminar-actividad', activity.id]">
+      <a title="delete-activity" class="edit-button" [routerLink]="['/actividades', activity.id]" (click)="onDeleteClick()">
         <i class="bi bi-trash3 edit-button"></i>
       </a>      
     </div>      

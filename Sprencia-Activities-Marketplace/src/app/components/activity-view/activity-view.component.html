@@ -18,7 +18,7 @@
     <div>
         <div class="row">
             <div class="col mb-2">
-                <i class="bi bi-chat-dots"><span class="text-number-reviews-purchase-section mx-2">{{numberOfReviews}} opiniones</span></i>
+                <i class="bi bi-chat-dots"><span class="text-number-reviews-purchase-section mx-2"> {{numberOfReviews}} opiniones</span></i>
             </div>
         </div>
         <div class="row">
@@ -36,7 +36,7 @@
             <i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i>
           </div>
           <div class="col-auto">
-            <i class="bi bi-chat-dots"></i><span class="text-number-reviews-purchase-section"> 10 opiniones</span>                 
+            <i class="bi bi-chat-dots"></i><span class="text-number-reviews-purchase-section"> {{numberOfReviews}} opiniones</span>                 
           </div>
        </div>
        <div>
@@ -107,17 +107,6 @@
               <small class="fst-italic mb-3">Publicado el {{review.date}}</small>          
             </div>
           </section>
-          <!-- <section id="reviews" class="d-flex flex-column border border-secondary rounded px-4 my-4">
-            <div class="d-flex align-items-center">
-              <img class="user-img" src="assets\img\user-logo.png" alt="user-img">
-              <p class="h6 fw-bold w-100">María Martín</p>
-              <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
-            </div>
-            <div class="d-flex flex-column">                  
-              <p>Harum excepturi porro dolorum magnam unde odio quibusdam omnis. Dolorem, ex molestiae consequatur omnis sint vel obcaecati dolorum sit accusantium? Numquam quis doloremque adipisci possimus ut porro</p>
-              <small class="fst-italic mb-3">Publicado el 10 de marzo de 2024</small>
-            </div>
-          </section>     -->
         </div>
         <!-- Sidebar -->
         <aside class="col-4 d-none d-lg-block sticky-top">
@@ -136,7 +125,7 @@
                   <i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i><i class="bi bi-star-fill text-warning small"></i>
                 </div>
                 <div class="col-auto">
-                  <i class="bi bi-chat-dots"></i><span class="text-number-reviews-purchase-section"> 10 opiniones</span>                 
+                  <i class="bi bi-chat-dots"></i><span class="text-number-reviews-purchase-section"> {{numberOfReviews}} opiniones</span>                 
                 </div>
              </div>            
             <p class="h4 fw-bold d-inline-block my-3 text-end">{{activity?.price}} €</p>

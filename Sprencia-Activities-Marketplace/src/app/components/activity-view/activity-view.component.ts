@@ -28,6 +28,7 @@ export class ActivityViewComponent {
 
   async ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
+      // Convertir tipo entero el parámetro variable de la url (params)
       const id = parseInt(params.idactivity);
 
       // Recuperar datos de la actividad (actividad, horarios y opiniones).
@@ -43,6 +44,7 @@ export class ActivityViewComponent {
       this.reviewsActivityFormatted = this.mapToReviewsActivityFormated(this.reviewsActivity || []);
       console.log (this.reviewsActivityFormatted); 
 
+      // Mostrar en la cabecera de la página (arriba de la página) el número de opiniones.
       this.numberOfReviews = this.getNumberOfReviews(this.reviewsActivity);
       
     })
@@ -54,6 +56,12 @@ export class ActivityViewComponent {
       this.reviewsActivity = this.activity?.review.map(review => review);
     }    
     return this.reviewsActivity;
+  }
+
+  // Método que devuelve el número de reviews que tiene una actividad.
+  getNumberOfReviews (reviewsActivity: Review[] | undefined): number | undefined {
+    const numberOfReviews = reviewsActivity?.length;
+    return numberOfReviews;
   }
 
   // Método que se le pasa una fecha y la formatea.
@@ -112,12 +120,9 @@ export class ActivityViewComponent {
 
   }
 
-  getNumberOfReviews (reviewsActivity: Review[] | undefined): number | undefined{
-    const numberOfReviews = reviewsActivity?.length;
-    return numberOfReviews;
-  }
-
 }
+
+
 
 
  
