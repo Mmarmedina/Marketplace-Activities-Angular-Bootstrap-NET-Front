@@ -21,7 +21,7 @@ export class ReviewsSprenciaThumbnailComponent {
         activityId: 0
       }
 
-      this.dateFormated = ''
+      this.dateFormated = '';
     }
 
     ngOnInit() {

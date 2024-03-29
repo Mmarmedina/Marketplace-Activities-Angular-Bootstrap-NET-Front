@@ -78,7 +78,7 @@ export class ActivityViewComponent {
       const monthName = months[monthNumber];
 
       this.dateFormated = `${day} de ${monthName} de ${year}`;
-      console.log (this.dateFormated);
+      console.log (this.dateFormated);    
 
     })  
 
