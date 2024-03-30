@@ -46,6 +46,7 @@ export class ActivityViewComponent {
 
       // Mostrar en la cabecera de la página (arriba de la página) el número de opiniones.
       this.numberOfReviews = this.getNumberOfReviews(this.reviewsActivity);
+      console.log (this.numberOfReviews);
       
     })
   }

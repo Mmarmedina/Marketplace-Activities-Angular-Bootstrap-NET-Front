@@ -15,6 +15,17 @@ i {
     color: var(--secondary-color-blue);
 }
 
+.btn-outline-success-header {
+    color: var(--secondary-color-white);
+    font-weight: bold;
+    border: none;
+    background-color: var(--color-background-site);
+}
+
+.btn-outline-success-header:hover {
+    background-color: var(--secondary-color-blue);
+    color: var(--secondary-color-white);
+}
 .btn-outline-success {
     color: var(--secondary-color-blue);
     font-weight: bold;

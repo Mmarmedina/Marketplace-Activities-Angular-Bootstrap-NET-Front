@@ -4,13 +4,17 @@
         <div class="col-sm-12 col-lg-6 d-flex flex-column justify-content-center p-5">
             <h2 class="fw-bold px-3 title">Contacta con Sprencia</h2>
             <p class="px-3">¡Nos encantaría saber ti! Si tienes alguna pregunta, comentario o sugerencia, no dudes en ponerte en contacto con nosotros.
-        </p>
+            </p>
+            <div class="px-3">
+                <button class="btn btn-sm px-4 py-2 btn-outline-success-header" [routerLink]="['/contacto']" fragment="how-to-contact">Contactar ahora</button>
+            </div>
+            
         </div>
         <div class="d-none d-lg-block col-md-6 img-header-contact">
         </div>
     </header>
     <main>
-        <section class="container mt-5">
+        <section id="how-to-contact" class="container mt-5">
             <section class="row">
                 <div class="col-sm-12 col-lg-6 px-5 py-3">            
                     <div class="d-flex flex-column justify-content-center align-items-center box-info p-4 border border-secondary h-100">
@@ -19,7 +23,7 @@
                         </p>
                         <p class="text-center mb-4"> ¿Tienes algún problema o dudas sobre alguna de nuestras actividades? No te preocupes, escríbenos, ¡estamos aquí para ayudarte!
                         </p>
-                        <button class="btn btn-outline-success btn-sm px-4 py-2" routerLink='#'>Contacto email</button>
+                        <button class="btn btn-outline-success btn-sm px-4 py-2" [routerLink]="['/contacto']" fragment="email-contact">Contacto email</button>
                     </div>
                 </div>
                 <div class="col-sm-12 col-lg-6 px-5 py-3">        
@@ -42,7 +46,7 @@
                 </header>               
                 <article id="email-contact" class="px-3">
                     <h2 class="h6 fw-bold">Correo electrónico</h2>
-                    <p class="">info&#64;sprencia.com</p>
+                    <p>info&#64;sprencia.com</p>
                 </article>
                 <article id="phone-number" class="px-3">
                     <h2 class="h6 fw-bold">Teléfono</h2>

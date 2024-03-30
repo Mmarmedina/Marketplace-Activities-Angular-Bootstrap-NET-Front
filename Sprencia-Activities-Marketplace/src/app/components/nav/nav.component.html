@@ -6,10 +6,13 @@
     <a class="navbar-brand d-none d-md-block fw-bold border-bottom" routerLink="/home">Sprencia</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" routerLink="/home">Actividades</a>
+        <a class="nav-link" [routerLink]="['/home']" fragment="all-activities-Sprencia">Actividades</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" routerLink="/nueva-actividad"> ➕ Nueva actividad</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']" fragment="reviews-Sprencia">Opiniones</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/contacto">Contacto</a>
