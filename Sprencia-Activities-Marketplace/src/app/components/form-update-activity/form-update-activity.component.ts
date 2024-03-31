@@ -4,13 +4,14 @@ import { Schedule } from '../../interfaces/schedule.interface';
 import { ActivitiesService } from '../../services/activities.service';
 import { SchedulesService } from '../../services/schedules.service';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-update-activity',
   templateUrl: './form-update-activity.component.html',
   styleUrl: './form-update-activity.component.css'
 })
+
 export class FormUpdateActivityComponent {
   updateActivityForm!: FormGroup;
   activity: Activity | undefined;
@@ -24,13 +25,6 @@ export class FormUpdateActivityComponent {
 
       this.allSchedules = [];
       this.updateSchedules = []
-
-      // this.updateActivityForm = new FormGroup({
-      //   title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
-      //   description: new FormControl('', [Validators.required, Validators.minLength(100)]),
-      //   price: new FormControl('', [Validators.required]),
-      //   schedule: new FormControl('', [Validators.requiredTrue]),
-      // });    
   }
 
   async ngOnInit() {
@@ -51,6 +45,7 @@ export class FormUpdateActivityComponent {
       // MMM Que al cargar la página salgan los valores que tiene la actividad grabados en base de datos.
       this.setDefaultFormValues(this.allSchedules);
       
+      // Método para mostrar el estado de todos los validadores en la consola
       this.logValidatorsState();
     })
   }
@@ -59,17 +54,24 @@ export class FormUpdateActivityComponent {
     // Método: updateFormControlScheduleValue. Al darle al botón de enviar el objeto que se envía al back, incluya los horarios seleccionados por el usuario, y la información se envíe actualizada.
     this.updateFormControlScheduleValue();
     console.log (this.updateActivityForm.value);
-     // Método para mostrar el estado de todos los validadores en la consola
-    this.logValidatorsState();   
+
+    // Método para mostrar el estado de todos los validadores en la consola
+    this.logValidatorsState();
+    
+    // Petición al servicio para editar la actividad.
+    console.log (this.updateActivityForm.value);
+    const response = await this.activitiesService.update(this.updateActivityForm.value);
+    console.log (response);
   }
   
   // MMM Formulario y sus validaciones.
   initializeForm(){
     this.updateActivityForm = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(100)]),
-      price: new FormControl('', [Validators.required]),
-      schedule: new FormControl('', [Validators.requiredTrue]),
+      Id: new FormControl(''),
+      Title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
+      Description: new FormControl('', [Validators.required, Validators.minLength(100)]),
+      Price: new FormControl('', [Validators.required]),
+      ScheduleId: new FormControl('', [Validators.requiredTrue]),
     },);
   }
 
@@ -89,9 +91,10 @@ export class FormUpdateActivityComponent {
 
       // MMM updateActivityForm es el formulario, estamos asignándole a cada una de sus propiedades los valores de la actividad recuperada de BBDD.
       this.updateActivityForm.patchValue({
-        title: this.activity.title,
-        description: this.activity.description,
-        price: this.activity.price,
+        Id: this.activity.id,
+        Title: this.activity.title,
+        Description: this.activity.description,
+        Price: this.activity.price,
       });
     }
 
@@ -122,11 +125,10 @@ export class FormUpdateActivityComponent {
     });
 
     // Forzar el estado de validación de los campos como válidos. En un validador null es igual que no hay error.
-    this.updateActivityForm.get('title')?.setErrors(null);
-    this.updateActivityForm.get('description')?.setErrors(null);
-    this.updateActivityForm.get('price')?.setErrors(null);
-    this.updateActivityForm.get('schedule')?.setErrors(null);
-
+    this.updateActivityForm.get('Title')?.setErrors(null);
+    this.updateActivityForm.get('Description')?.setErrors(null);
+    this.updateActivityForm.get('Price')?.setErrors(null);
+    this.updateActivityForm.get('ScheduleId')?.setErrors(null);
   }
 
   // Si se cambian los horarios.
@@ -140,10 +142,17 @@ export class FormUpdateActivityComponent {
       this.updateSchedules = this.updateSchedules.filter(item => item !== schedule.id);
     }
 
-    if(this.updateSchedules.length >= 1) {
-      this.updateActivityForm.get('schedule')?.setErrors(null);
+    // Comprobar si hay al menos un horario seleccionado el botón de editar no se desahbilite.
+    if (this.updateSchedules.length >= 1) {
+      // Si hay al menos uno seleccionado que el botón de editar no se ponga desahbilitado.
+      this.updateActivityForm.get('ScheduleId')?.setErrors(null);
+    } else {
+      // Si no hay horarios seleccionados que el botón salga desahbilitado.
+      this.updateActivityForm.get('ScheduleId')?.setErrors({ 'required': true });
     }
     
+    // Este método se debe llamar después de cualquier cambio en los horarios seleccionados.
+    // Actualizar el estado del botón después de cualquier cambio en los horarios seleccionados
     console.log(this.updateSchedules);
     return this.updateSchedules;  
   }  
@@ -151,19 +160,9 @@ export class FormUpdateActivityComponent {
   // MMM Método: updateFormControlScheduleValue. Al darle al botón de enviar el objeto que se envía al back, incluya los horarios seleccionados por el usuario, y la información se envíe actualizada.
   // Al formulario a su controlForm schedule se le asigna el valor de la variable updateSchedules.
   updateFormControlScheduleValue() {
-    this.updateActivityForm.get('schedule')?.setValue(this.updateSchedules);
+    this.updateActivityForm.get('ScheduleId')?.setValue(this.updateSchedules);
     console.log (this.updateActivityForm);
   }
-
-  //
-  // testBeforeSendForm(updateActivityForm: AbstractControl): any {
-    // MMM Habilitar el botón si todos los campos del formulario están rellenados correctamente y hay horarios asociados.
-
-    // Si todos los validadores son igual a null y updatesSchedules es mayor a 0, habilitar.
-    
-  //   return null
-  // }
-
 
   // MMM Método para mostrar el mensaje de error cuando no se rellena correctamente el campo.
   checkError (control: string, error: string) {
@@ -179,9 +178,8 @@ export class FormUpdateActivityComponent {
   Object.keys(this.updateActivityForm.controls).forEach(key => {
     const controlErrors = this.updateActivityForm.get(key)?.errors;
     console.log(`Control "${key}" tiene errores:`, controlErrors);
-  });
-}
-
+    });
+  }
 
 }
 
