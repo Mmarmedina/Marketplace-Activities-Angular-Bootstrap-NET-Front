@@ -17,7 +17,6 @@ export class FormNewActivityComponent {
   allSchedules: Schedule[];
   selectedSchedules: number [];
 
-
   constructor (
     private activitiesService: ActivitiesService,
     private schedulesService: SchedulesService,
@@ -43,37 +42,7 @@ export class FormNewActivityComponent {
     this.updateFormControlScheduleValue(this.selectedSchedules);
     console.log (this.newActivityForm.value);
 
-    try {
-      const response = await this.activitiesService.create(this.newActivityForm.value);
-      console.log (response);
-
-      // Mensaje de alerta
-      Swal.fire({
-        title: "La actividad se ha añadido correctamente",
-        width: 600,
-        padding: "3em",
-        color: " #fff;",
-        background: "#fff url()",
-        backdrop: `
-          rgba(0,0,123,0.4)
-          url("")
-          left top
-          no-repeat
-        `
-      });
-      // Redirigir a la home para ver que se ha añadido la actividad.      
-      this.router.navigate(['/home']);
-    } catch (error) {
-      // Mensaje de alerta en caso de error
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "La actividad no se ha podido añadir. Inténtalo de nuevo.",
-        // footer: '<a href="#">Why do I have this issue?</a>'
-      });
-      this.router.navigate(['/nueva-actividad']);
-    }    
-    console.log (this.newActivityForm.value);
+    this.requestUpdateActivityToBBDD();
   }
 
   // MMM Petición al servicio de todos los horarios (entidad Schedules en BBDD) para pintar el checkbox con los horarios en los que podría realizarse la nueva actividad.
@@ -100,6 +69,47 @@ export class FormNewActivityComponent {
   // MMM El valor del FormControl Schedule se debe actualizar antes de hacer la petición de inserción al back, de manera que se incluyan solo los horarios seleccionados.
   updateFormControlScheduleValue(selectedSchedules: number []) {
       this.newActivityForm.get('schedule')?.setValue(this.selectedSchedules);
+  }
+
+  async requestUpdateActivityToBBDD(): Promise<void> {
+    const result = await Swal.fire({
+      title: "¿Estás seguro de que quieres añadir la actividad?",
+      // text: "Esta acción es irreversible",
+      // icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "¡Sí, añádela!"
+    });
+  
+    // Si el usuario confirma la eliminación se hace la petición update.
+    if (result.isConfirmed) {
+      try {
+        // Añadir la actividad
+        const response = await this.activitiesService.create(this.newActivityForm.value);
+        console.log (response);
+
+        // Mostrar mensaje de que la actividad ha sido actualizada.
+        Swal.fire({
+          title: "Nueva actividad",
+          text: "La actividad se ha añadido correctamente",
+          icon: "success"
+        });
+  
+        // Redirigir a la página de inicio.
+        this.router.navigate(['/home']);
+      } catch (error) {
+        // Mensaje si falla el proceso de añadir la nueva actividad.
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "La actividad no se ha podido añadir. Inténtalo de nuevo.",
+          // footer: '<a href="#">Why do I have this issue?</a>'
+        });
+      }// Si le da a cancelar redirige al formulario de añadir la actividad.
+      } else {
+        this.router.navigate(['/nueva-actividad']);
+      }
   }
 
   // MMM Método para mostrar el mensaje de error cuando no se rellena correctamente el campo.
