@@ -26,14 +26,7 @@ export class FormNewActivityComponent {
   }
 
   ngOnInit(): void {
-    this.newActivityForm = new FormGroup({
-      title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
-      description: new FormControl('', [Validators.required, Validators.minLength(100)]), 
-      price: new FormControl('', [Validators.required]), 
-      // price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
-      schedule: new FormControl('', [Validators.requiredTrue]),
-    },[])
-
+    this.initializeForm();
     this.getAllSchedules();
   }
 
@@ -42,7 +35,17 @@ export class FormNewActivityComponent {
     this.updateFormControlScheduleValue(this.selectedSchedules);
     console.log (this.newActivityForm.value);
 
-    this.requestUpdateActivityToBBDD();
+    this.requestCreateActivityToBBDD();
+  }
+
+  initializeForm(): void {
+    this.newActivityForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(100)]), 
+      price: new FormControl('', [Validators.required]), 
+      // price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
+      schedule: new FormControl('', [Validators.requiredTrue]),
+    },[])
   }
 
   // MMM Petición al servicio de todos los horarios (entidad Schedules en BBDD) para pintar el checkbox con los horarios en los que podría realizarse la nueva actividad.
@@ -71,7 +74,7 @@ export class FormNewActivityComponent {
       this.newActivityForm.get('schedule')?.setValue(this.selectedSchedules);
   }
 
-  async requestUpdateActivityToBBDD(): Promise<void> {
+  async requestCreateActivityToBBDD(): Promise<void> {
     const result = await Swal.fire({
       title: "¿Estás seguro de que quieres añadir la actividad?",
       // text: "Esta acción es irreversible",

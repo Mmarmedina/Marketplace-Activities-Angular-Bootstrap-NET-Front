@@ -71,7 +71,7 @@ export class FormUpdateActivityComponent {
   }
   
   // MMM Formulario y sus validaciones.
-  initializeForm(){
+  initializeForm(): void {
     this.updateActivityForm = new FormGroup({
       Id: new FormControl(''),
       Title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
