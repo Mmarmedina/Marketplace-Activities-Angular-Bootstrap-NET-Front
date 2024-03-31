@@ -3,8 +3,10 @@ import { Activity } from '../../interfaces/activity.interface';
 import { Schedule } from '../../interfaces/schedule.interface';
 import { ActivitiesService } from '../../services/activities.service';
 import { SchedulesService } from '../../services/schedules.service';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-update-activity',
@@ -21,7 +23,8 @@ export class FormUpdateActivityComponent {
   constructor (
     private activitiesService: ActivitiesService,
     private activatedRoute: ActivatedRoute,
-    private schedulesService: SchedulesService){
+    private schedulesService: SchedulesService,
+    private router: Router){
 
       this.allSchedules = [];
       this.updateSchedules = []
@@ -57,11 +60,14 @@ export class FormUpdateActivityComponent {
 
     // Método para mostrar el estado de todos los validadores en la consola
     this.logValidatorsState();
-    
+
+    // MMM Método para mostrar el estado de todos los validadores en la consola.
+    this.requestUpdateActivityToBBDD();
+
     // Petición al servicio para editar la actividad.
-    console.log (this.updateActivityForm.value);
-    const response = await this.activitiesService.update(this.updateActivityForm.value);
-    console.log (response);
+    // console.log (this.updateActivityForm.value);
+    // const response = await this.activitiesService.update(this.updateActivityForm.value);
+    // console.log (response);
   }
   
   // MMM Formulario y sus validaciones.
@@ -171,9 +177,48 @@ export class FormUpdateActivityComponent {
     }else {
       return false
     }
-  }   
+  }
+  
+  // MMM Petición al servicio de actualizaciónd de la actividad. 
+  async requestUpdateActivityToBBDD(): Promise<void> {
+    try {
+      const response = await this.activitiesService.update(this.updateActivityForm.value);
+      console.log (response);
+      
+      // Mensaje de alerta
+      Swal.fire({
+        title: "La información de la actividad se ha actualizado correctamente",
+        width: 600,
+        padding: "3em",
+        color: " #fff;",
+        background: "#fff url()",
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("")
+          left top
+          no-repeat
+        `
+      });
 
-  // Método para mostrar el estado de todos los validadores en la consola
+      this.router.navigate(['/actividades', this.activity?.id]);
+      
+    } catch (error) {
+      // Mensaje de alerta en caso de error
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "La actividad no se ha podido actualizar. Inténtalo de nuevo.",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+
+      this.router.navigate(['/home']);
+    }
+    
+    console.log (this.updateActivityForm.value);
+  }
+
+
+  // MMM Método para mostrar el estado de todos los validadores en la consola.
   logValidatorsState() {
   Object.keys(this.updateActivityForm.controls).forEach(key => {
     const controlErrors = this.updateActivityForm.get(key)?.errors;
