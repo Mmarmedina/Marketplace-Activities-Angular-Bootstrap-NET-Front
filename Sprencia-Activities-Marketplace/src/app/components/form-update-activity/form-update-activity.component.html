@@ -42,7 +42,7 @@
                 <div class="mb-2 p-2">
                     <div *ngFor="let schedule of allSchedules">
                         <label class="small" [for]="schedule.name">
-                            <input type="checkbox" [id]="schedule.id" [name]="schedule.name" formControlName="schedule" (change)="updateSelectedSchedules($event, schedule, updateSchedules)">
+                            <input type="checkbox" [id]="schedule.id" [name]="schedule.name" formControlName="schedule" (change)="updateSelectedSchedules($event, schedule)">
                             {{schedule.name}}
                         </label>
                     </div>
@@ -51,7 +51,8 @@
                     *ngIf="checkError ('schedule', 'required')">Indica los horarios de la nueva actividad.
                 </p>
             </div>
-            <button class="btn btn-outline-success mt-3 mb-5 fw-bold w-50" type="submit" [disabled]="updateActivityForm.invalid">Crear</button>
+            <!-- <button id="edit-button" class="btn btn-outline-success mt-3 mb-5 fw-bold w-50" type="submit">Editar</button> -->
+            <button id="edit-button" class="btn btn-outline-success mt-3 mb-5 fw-bold w-50" type="submit" [disabled]="updateActivityForm.invalid">Editar</button>
         </form>
     </section>
 </main>
