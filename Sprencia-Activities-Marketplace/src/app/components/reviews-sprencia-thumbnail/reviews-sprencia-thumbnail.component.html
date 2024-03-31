@@ -11,8 +11,15 @@
         </div>
     </div>
     <div class="d-flex flex-column">                  
-        <p class="review-text">{{review.reviewText}}</p>
-        <p class="h6 d-block mb-3"><u>Leer más...</u></p>
+        <p [ngClass]="{'limitTextHeight': isReadMore}">{{review.reviewText}}</p>
+        <p class="small readMore" (click)="showText()"><u class="text-success">Leer más...</u></p>
         <small class="fst-italic mb-3">Publicada el {{this.dateFormated}}</small>
     </div>
+
+
+    <!-- <div class="d-flex flex-column">                  
+        <p class="review-text">{{review.reviewText}}</p>
+        <p class="h6 d-block mb-3" nfIf*=""><u>Leer más...</u></p>
+        <small class="fst-italic mb-3">Publicada el {{this.dateFormated}}</small>
+    </div> -->
 </section>

@@ -11,6 +11,8 @@ export class ReviewsSprenciaThumbnailComponent {
 
     @Input () review: Review;
     dateFormated: string;
+    isReadMore = true;
+    showReadMore = true;
 
     constructor() {
       this.review = {
@@ -26,6 +28,10 @@ export class ReviewsSprenciaThumbnailComponent {
 
     ngOnInit() {
       this.formatDate();
+    }
+
+    showText() {
+      this.isReadMore = !this.isReadMore;
     }
 
     formatDate() {
