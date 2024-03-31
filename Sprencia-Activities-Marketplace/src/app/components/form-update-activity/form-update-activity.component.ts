@@ -179,42 +179,49 @@ export class FormUpdateActivityComponent {
     }
   }
   
-  // MMM Petición al servicio de actualizaciónd de la actividad. 
-  async requestUpdateActivityToBBDD(): Promise<void> {
-    try {
-      const response = await this.activitiesService.update(this.updateActivityForm.value);
-      console.log (response);
-      
-      // Mensaje de alerta
-      Swal.fire({
-        title: "La información de la actividad se ha actualizado correctamente",
-        width: 600,
-        padding: "3em",
-        color: " #fff;",
-        background: "#fff url()",
-        backdrop: `
-          rgba(0,0,123,0.4)
-          url("")
-          left top
-          no-repeat
-        `
+  // MMM Petición al servicio de actualización de la actividad. 
+  async requestUpdateActivityToBBDD(): Promise<void> {    
+      const result = await Swal.fire({
+        title: "¿Estás seguro de que quieres editar la actividad?",
+        // text: "Esta acción es irreversible",
+        // icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "¡Sí, actualízala!"
       });
-
-      this.router.navigate(['/actividades', this.activity?.id]);
-      
-    } catch (error) {
-      // Mensaje de alerta en caso de error
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "La actividad no se ha podido actualizar. Inténtalo de nuevo.",
-        // footer: '<a href="#">Why do I have this issue?</a>'
-      });
-
-      this.router.navigate(['/home']);
-    }
     
-    console.log (this.updateActivityForm.value);
+      // Si el usuario confirma la eliminación se hace la petición update.
+      if (result.isConfirmed) {
+        try {
+          // Editar la actividad
+          const response = await this.activitiesService.update(this.updateActivityForm.value);
+          console.log (response);
+          
+          // Mostrar mensaje de que la actividad ha sido actualizada.
+          Swal.fire({
+            title: "Actualizada",
+            text: "La actividad ha sido editada correctamente",
+            icon: "success"
+          });
+    
+          // Redirigir a la página de inicio
+          this.router.navigate(['/actividades', this.activity?.id]);
+        } catch (error) {
+          // Mensaje si falla el proceso de edición.
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "La actividad no se ha podido eliminar. Inténtalo de nuevo.",
+            // footer: '<a href="#">Why do I have this issue?</a>'
+          });
+        }// Si le da a cancelar redirige a home.
+        } else {
+          this.router.navigate(['/home']);
+        }
+
+      console.log (this.updateActivityForm.value);
+      
   }
 
 
