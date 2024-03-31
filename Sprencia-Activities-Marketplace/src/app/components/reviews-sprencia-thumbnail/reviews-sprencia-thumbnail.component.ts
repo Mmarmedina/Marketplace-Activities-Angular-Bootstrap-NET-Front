@@ -12,7 +12,7 @@ export class ReviewsSprenciaThumbnailComponent {
     @Input () review: Review;
     dateFormated: string;
     isReadMore = true;
-    showReadMore = true;
+    
 
     constructor() {
       this.review = {
