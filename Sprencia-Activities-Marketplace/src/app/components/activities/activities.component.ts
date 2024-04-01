@@ -11,10 +11,14 @@ import { Activity } from '../../interfaces/activity.interface';
 export class ActivitiesComponent {
   activities: Activity[];
   totalActivities: number;
+  itemsPerPage: number;
+  currentPage: number;
 
   constructor(private activitiesService: ActivitiesService) {
     this.activities = [];
     this.totalActivities = 0;
+    this.itemsPerPage = 2;
+    this.currentPage = 1;
   }
 
   ngOnInit() {
@@ -33,6 +37,14 @@ export class ActivitiesComponent {
     // Si no se hace así totalActivities sale como un array vacío (0).
     this.totalActivities = this.activities.length;
     console.log(this.totalActivities);
+    console.log(this.currentPage);
+  }
+
+  // Recibe el ouput del hijo (pagination-activities) con el número de página que se ha clicado, y la página pulsada se convierte en la página actual. 
+  changePage(page: number): void {
+    this.currentPage = page;
+    console.log(page);
+    alert(page);
   }
     
 }

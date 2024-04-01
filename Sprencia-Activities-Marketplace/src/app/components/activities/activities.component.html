@@ -1,11 +1,19 @@
 <section id="all-activities-Sprencia">
-    <div class="row g-4 mb-5 p-5">
+    <div class="row g-4 mb-3 p-5">
         <h2 class="fw-bold text-center">Actividades de las que puedes disfrutar con Sprencia</h2>
         <article class="col-sm-12 col-md-6" *ngFor="let activity of activities">
             <app-activity-thumbnail [activity]="activity"></app-activity-thumbnail>
         </article>
        
         <!--MMM Ver compentarios en TS de activity-component.  -->
-        <app-pagination-activities *ngIf="totalActivities !== 0" [totalActivities]="totalActivities" [itemsPerPage]="10"></app-pagination-activities>     
+        <!-- onClick: ouput que recibe de pagination-component. -->
+        
+        <app-pagination-activities 
+            *ngIf="totalActivities !== 0" 
+            [totalActivities]="totalActivities" 
+            [itemsPerPage]="itemsPerPage" 
+            [currentPage]="currentPage"
+            (onClick)="changePage($event)">
+        </app-pagination-activities>              
     </div>
 </section>
