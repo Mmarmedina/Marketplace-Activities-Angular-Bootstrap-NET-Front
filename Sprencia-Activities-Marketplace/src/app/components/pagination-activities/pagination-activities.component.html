@@ -1,34 +1,40 @@
 
 
 <nav aria-label="Page navigation example">
-  <ul class="pagination pagination-lg">
+  <ul class="pagination pagination-sm">
     <li class="page-item">
-      <a class="page-link text-success" href="#" aria-label="Previous">
+      <a 
+        (click)="pageClicked(currentPage - 1)"
+        class="page-link text-success mouse-pointer"
+        [routerLink]="['/home']" fragment="all-activities-Sprencia"
+        aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
     
     <!-- MMM Para que se marque la página actual: [ngClass]="{ active: page == currentPage }" -->
     <li
-      *ngFor="let page of pages"  
-      (click)="pageClicked(page)"
+      *ngFor="let page of pages"
       class="page-item" 
-      [ngClass]="{ 'active': page === currentPage }" 
+      [ngClass]="{ 'active': page == currentPage }" 
       >
       <!-- Colores de la página activa y las que no lo están. -->
       <a
-        class="page-link"
-        [ngClass]="{ 'text-white bg-success': page == currentPage, 'text-success': page != currentPage }"
-        href="#" >{{page}}
+        (click)="pageClicked(page)"
+        class="page-link mouse-pointer"
+        [routerLink]="['/home']"  fragment="all-activities-Sprencia"
+        [ngClass]="{'text-white bg-success': page == currentPage, 'text-success': page != currentPage }">{{page}}
       </a>
     </li>
     <li class="page-item">
-      <a class="page-link text-success" href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
+      <a 
+        (click)="pageClicked(currentPage + 1)"
+        class="page-link text-success mouse-pointer" 
+        [routerLink]="['/home']"  fragment="all-activities-Sprencia"
+        aria-label="Next"
+         >
+          <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
   </ul>
 </nav>
-
-
-

@@ -13,19 +13,22 @@ export class ActivitiesComponent {
   totalActivities: number;
   itemsPerPage: number;
   currentPage: number;
+  activitiesOnlyOnePage: Activity[];
 
   constructor(private activitiesService: ActivitiesService) {
     this.activities = [];
     this.totalActivities = 0;
-    this.itemsPerPage = 2;
+    this.itemsPerPage = 4;
     this.currentPage = 1;
+    this.activitiesOnlyOnePage = [];
   }
 
   ngOnInit() {
-    this.getAll();
+    this.getAllAndPaginate();
+    
   }
 
-  async getAll(): Promise<void> {
+  async getAllAndPaginate(): Promise<void> {
     // Se recupera el array de actividades.
     this.activities = await this.activitiesService.getAll();
     console.log (this.activities);
@@ -38,13 +41,28 @@ export class ActivitiesComponent {
     this.totalActivities = this.activities.length;
     console.log(this.totalActivities);
     console.log(this.currentPage);
+
+    // Nos quedamos sólo con las que saldrán en una página.
+    this.paginatedData();   
   }
 
+  // Sólo las actividades que se muestran en la página actual.
+  paginatedData(): void {
+    const start = (this.currentPage - 1) * (this.itemsPerPage);
+    const end = start + this.itemsPerPage;
+    this.activitiesOnlyOnePage = this.activities.slice(start, end);
+    console.log(this.currentPage);
+    console.log(this.activitiesOnlyOnePage);
+  }
+  
   // Recibe el ouput del hijo (pagination-activities) con el número de página que se ha clicado, y la página pulsada se convierte en la página actual. 
   changePage(page: number): void {
     this.currentPage = page;
     console.log(page);
-    alert(page);
+    typeof(page);
+    this.paginatedData();
+    //alert("Página seleccionada en el componente padre" + page);
+    //alert("Página seleccionada en el componente padre" + this.currentPage);
   }
     
 }
