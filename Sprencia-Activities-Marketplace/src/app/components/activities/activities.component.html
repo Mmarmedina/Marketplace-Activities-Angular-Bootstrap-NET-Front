@@ -4,5 +4,8 @@
         <article class="col-sm-12 col-md-6" *ngFor="let activity of activities">
             <app-activity-thumbnail [activity]="activity"></app-activity-thumbnail>
         </article>
+       
+        <!--MMM Ver compentarios en TS de activity-component.  -->
+        <app-pagination-activities *ngIf="totalActivities !== 0" [totalActivities]="totalActivities" [itemsPerPage]="10"></app-pagination-activities>     
     </div>
 </section>
