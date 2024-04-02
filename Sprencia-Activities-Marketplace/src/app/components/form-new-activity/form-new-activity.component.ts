@@ -42,8 +42,7 @@ export class FormNewActivityComponent {
     this.newActivityForm = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(25), Validators.maxLength(130)]),
       description: new FormControl('', [Validators.required, Validators.minLength(100)]), 
-      price: new FormControl('', [Validators.required]), 
-      // price: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{2})?$/)]), 
+      price: new FormControl('', [Validators.required]),
       schedule: new FormControl('', [Validators.requiredTrue]),
     },[])
   }
@@ -55,7 +54,7 @@ export class FormNewActivityComponent {
   }
 
   // MMM Si se marca el check de un horario se dispara evento change y checkbox seleccionado toma valor true. Cuando esto sucede entra en el if, y el objeto con los datos del horario seleccionado (schedule) se añade al array selectedSchedules.
-  // Si se desmarca el checbox, entra en el else (porque su valor no es true). Se filtra el array que se compone de los elementos seleccionados y deja todos los objetos (schedule) que sean distintos al desmarcado.
+  // MMM Si se desmarca el checbox, entra en el else (porque su valor no es true). Se filtra el array que se compone de los elementos seleccionados y deja todos los objetos (schedule) que sean distintos al desmarcado.
   updateSelectedSchedules (event: Event, schedule: Schedule): number []{
     const checkbox = event.target as HTMLInputElement;
 
@@ -85,31 +84,31 @@ export class FormNewActivityComponent {
       confirmButtonText: "¡Sí, añádela!"
     });
   
-    // Si el usuario confirma la eliminación se hace la petición update.
+    // MMM Si el usuario confirma la eliminación se hace la petición update.
     if (result.isConfirmed) {
       try {
-        // Añadir la actividad
+        // MMM Añadir la actividad
         const response = await this.activitiesService.create(this.newActivityForm.value);
         console.log (response);
 
-        // Mostrar mensaje de que la actividad ha sido actualizada.
+        // MMM Mostrar mensaje de que la actividad ha sido actualizada.
         Swal.fire({
           title: "Nueva actividad",
           text: "La actividad se ha añadido correctamente",
           icon: "success"
         });
   
-        // Redirigir a la página de inicio.
+        // MMM Redirigir a la página de inicio.
         this.router.navigate(['/home']);
       } catch (error) {
-        // Mensaje si falla el proceso de añadir la nueva actividad.
+        // MMM Mensaje si falla el proceso de añadir la nueva actividad.
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: "La actividad no se ha podido añadir. Inténtalo de nuevo.",
           // footer: '<a href="#">Why do I have this issue?</a>'
         });
-      }// Si le da a cancelar redirige al formulario de añadir la actividad.
+      }// MMM Si le da a cancelar redirige al formulario de añadir la actividad.
       } else {
         this.router.navigate(['/nueva-actividad']);
       }

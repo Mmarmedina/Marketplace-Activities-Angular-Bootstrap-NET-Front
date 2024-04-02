@@ -17,15 +17,9 @@ const routes: Routes = [
   { path: '**', redirectTo: '/home'}
 ];
 
-// @NgModule({
-//   imports: [RouterModule.forRoot(routes)],
-//   exports: [RouterModule]
-// })
-
 @NgModule({
   imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled' })],
   exports: [RouterModule]
 })
-
 
 export class AppRoutingModule { }

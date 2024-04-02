@@ -6,6 +6,7 @@ import { Schedule } from '../interfaces/schedule.interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SchedulesService {
 
   private baseUrl: string; 

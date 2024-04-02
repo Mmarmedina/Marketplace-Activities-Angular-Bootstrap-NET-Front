@@ -19,7 +19,5 @@ export class ReviewsSprenciaComponent {
   async ngOnInit() {
     this.reviews = await this.reviewsService.getAll();
     console.log (this.reviews);
-  }
-
-  
+  }  
 }

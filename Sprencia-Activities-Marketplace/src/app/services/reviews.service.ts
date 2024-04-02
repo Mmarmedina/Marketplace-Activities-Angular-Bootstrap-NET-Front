@@ -6,6 +6,7 @@ import { Review } from '../interfaces/review.interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ReviewsService {
 
   private baseUrl: string;
@@ -18,5 +19,4 @@ export class ReviewsService {
     const response = lastValueFrom(this.httpClient.get<Review[]>(this.baseUrl));
     return response;
   }
-
 }

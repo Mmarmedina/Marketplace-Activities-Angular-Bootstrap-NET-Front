@@ -28,30 +28,29 @@ export class ActivityViewComponent {
 
   async ngOnInit() {
     this.activatedRoute.params.subscribe(async (params: any) => {
-      // Convertir tipo entero el parámetro variable de la url (params)
+      // MMM Convertir tipo entero el parámetro variable de la url (params)
       const id = parseInt(params.idactivity);
-
-      // Recuperar datos de la actividad (actividad, horarios y opiniones).
+      
+      // MMM Recuperar datos de la actividad (actividad, horarios y opiniones).
       this.activity = await this.activitiesService.getById(params.idactivity);
       console.log (this.activity);
 
-      // Si el servicio devuelve una actividad, del objeto activividad me quedo sólo con la información de las opiniones de la actividad (para pintar las opiniones).
+      // MMM Si el servicio devuelve una actividad, del objeto activividad me quedo sólo con la información de las opiniones de la actividad (para pintar las opiniones).
       this.reviewsActivity = this.getReviews(this.activity);
       console.log(this.reviewsActivity);
 
-      // Se crea un objeto tipo ReviewFormatted: es igual que Review pero con la fecha tipo string. 
-      // El objetivo es poder pintar todos los datos de las opiniones de la actividad, incluida la fecha formateada.
+      // MMM Se crea un objeto tipo ReviewFormatted: es igual que Review pero con la fecha tipo string. 
+      // MMM El objetivo es poder pintar todos los datos de las opiniones de la actividad, incluida la fecha formateada.
       this.reviewsActivityFormatted = this.mapToReviewsActivityFormated(this.reviewsActivity || []);
       console.log (this.reviewsActivityFormatted); 
 
-      // Mostrar en la cabecera de la página (arriba de la página) el número de opiniones.
+      // MMM Mostrar en la cabecera de la página (arriba de la página) el número de opiniones.
       this.numberOfReviews = this.getNumberOfReviews(this.reviewsActivity);
-      console.log (this.numberOfReviews);
-      
+      console.log (this.numberOfReviews);      
     })
   }
 
-  // Del objeto activity, quedarme sólo con las opiniones.
+  // MMM Del objeto activity, quedarme sólo con las opiniones.
   getReviews (activity: Activity): Review [] | undefined {
     if (this.activity){
       this.reviewsActivity = this.activity?.review.map(review => review);
@@ -59,13 +58,13 @@ export class ActivityViewComponent {
     return this.reviewsActivity;
   }
 
-  // Método que devuelve el número de reviews que tiene una actividad.
+  // MMM Método que devuelve el número de reviews que tiene una actividad.
   getNumberOfReviews (reviewsActivity: Review[] | undefined): number | undefined {
     const numberOfReviews = reviewsActivity?.length;
     return numberOfReviews;
   }
 
-  // Método que se le pasa una fecha y la formatea.
+  // MMM Método que se le pasa una fecha y la formatea.
   formatDate(reviewDate: Date): string {
     const dateObject = new Date(reviewDate);
       const day = dateObject.getDate();
@@ -87,40 +86,30 @@ export class ActivityViewComponent {
         "diciembre"
       ];
       
-      // En JavaScript, los meses se representan como números enteros del 0 al 11.
-      // Si monthNumber es 0, months[monthNumber] devolverá 'enero'
-      // se está utilizando monthNumber como índice para acceder al nombre del mes correspondiente en el array months.
+    // MMM En JavaScript, los meses se representan como números enteros del 0 al 11.
+    // MMM Si monthNumber es 0, months[monthNumber] devolverá 'enero'
+    // MMM Se está utilizando monthNumber como índice para acceder al nombre del mes correspondiente en el array months.
+    const monthName = months[monthNumber];
 
-      const monthName = months[monthNumber];
-  
-      this.reviewDateTypeString = `${day} de ${monthName} de ${year}`;
-      console.log (this.reviewDateTypeString);
+    this.reviewDateTypeString = `${day} de ${monthName} de ${year}`;
+    console.log (this.reviewDateTypeString);
 
-      return this.reviewDateTypeString;
-
+    return this.reviewDateTypeString;
   }
 
-  mapToReviewsActivityFormated (reviewsActivity: Review[]): ReviewFormatted [] | undefined { 
-    
+  mapToReviewsActivityFormated (reviewsActivity: Review[]): ReviewFormatted [] | undefined {
     reviewsActivity.forEach(review => {
-
       const formattedReview: ReviewFormatted = {
         id: review.id,
         reviewText: review.reviewText,
         author: review.author,
         date: this.formatDate(review.date),
         activityId: review.activityId
-
       };
-
-      this.reviewsActivityFormatted?.push(formattedReview);
-    
-    });
-    
-    return this.reviewsActivityFormatted; 
-
+      this.reviewsActivityFormatted?.push(formattedReview);    
+    });    
+    return this.reviewsActivityFormatted;
   }
-
 }
 
 

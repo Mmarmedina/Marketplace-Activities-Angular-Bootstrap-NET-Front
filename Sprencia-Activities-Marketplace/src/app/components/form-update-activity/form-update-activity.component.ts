@@ -25,7 +25,6 @@ export class FormUpdateActivityComponent {
     private activatedRoute: ActivatedRoute,
     private schedulesService: SchedulesService,
     private router: Router){
-
       this.allSchedules = [];
       this.updateSchedules = []
   }
@@ -54,20 +53,15 @@ export class FormUpdateActivityComponent {
   }
 
   async onSubmit() {
-    // Método: updateFormControlScheduleValue. Al darle al botón de enviar el objeto que se envía al back, incluya los horarios seleccionados por el usuario, y la información se envíe actualizada.
+    // MMM Al darle al botón de enviar el objeto que se envía al back, incluya los horarios seleccionados por el usuario, y la información se envíe actualizada.
     this.updateFormControlScheduleValue();
     console.log (this.updateActivityForm.value);
 
-    // Método para mostrar el estado de todos los validadores en la consola
+    // MMM Método para mostrar el estado de todos los validadores en la consola
     this.logValidatorsState();
 
     // MMM Método para mostrar el estado de todos los validadores en la consola.
     this.requestUpdateActivityToBBDD();
-
-    // Petición al servicio para editar la actividad.
-    // console.log (this.updateActivityForm.value);
-    // const response = await this.activitiesService.update(this.updateActivityForm.value);
-    // console.log (response);
   }
   
   // MMM Formulario y sus validaciones.
@@ -115,13 +109,14 @@ export class FormUpdateActivityComponent {
       this.updateSchedules = [...selectedSchedulesIdsByDefault];
     }
 
-    // Los horarios de esa actividad deben estar en true para que salgan marcados al renderizar la página.
-    // Marcar los checkboxes correspondientes si los IDs están presentes en updateSchedules
-    // Bucle forEach que itera sobre cada objeto schedule en el array allSchedules.
-    // as HTMLInputElement se utiliza para indicar TypeScript que el elemento <input> es de tipo checkbox.
-    // getElementById() necesita un string como argumento, y el id es tipo number. Se convierte el id a string.
-    // Si document.getElementById no encuentra ningún elemento con el ID especificado en el DOM devuelve null. Queremos que el código dentro del bloque se ejecute si se encontró un elemento del DOM con el ID especificado.
-    // Si checkbox no es nulo y si además dentro de updateSchedules (que son los horarios que tiene la actividad recuperada), está alguno de los horarios de la base de datos, entonces, se marca el checkbox.
+    // MMM CREAR UN ARRAY DE ENTEROS CON LOS HORARIOS QUE TIENE LA ACTIVIDAD A EDITAR EN LA BBDD (ANTES DE ACTUALIZAR).
+      // Los horarios de esa actividad deben estar en true para que salgan marcados al renderizar la página.
+      // Marcar los checkboxes correspondientes si los IDs están presentes en updateSchedules
+      // Bucle forEach que itera sobre cada objeto schedule en el array allSchedules.
+      // as HTMLInputElement se utiliza para indicar TypeScript que el elemento <input> es de tipo checkbox.
+      // getElementById() necesita un string como argumento, y el id es tipo number. Se convierte el id a string.
+      // Si document.getElementById no encuentra ningún elemento con el ID especificado en el DOM devuelve null. Queremos que el código dentro del bloque se ejecute si se encontró un elemento del DOM con el ID especificado.
+      // Si checkbox no es nulo y si además dentro de updateSchedules (que son los horarios que tiene la actividad recuperada), está alguno de los horarios de la base de datos, entonces, se marca el checkbox.
     allSchedules.forEach(schedule => {
       const checkbox = document.getElementById(schedule.id.toString()) as HTMLInputElement;
       
@@ -130,16 +125,16 @@ export class FormUpdateActivityComponent {
       }
     });
 
-    // Forzar el estado de validación de los campos como válidos. En un validador null es igual que no hay error.
+    // MMM Forzar el estado de validación de los campos como válidos. En un validador null es igual que no hay error.
     this.updateActivityForm.get('Title')?.setErrors(null);
     this.updateActivityForm.get('Description')?.setErrors(null);
     this.updateActivityForm.get('Price')?.setErrors(null);
     this.updateActivityForm.get('ScheduleId')?.setErrors(null);
   }
 
-  // Si se cambian los horarios.
+  // MMM Si se cambian los horarios.
   updateSelectedSchedules (event: Event, schedule: Schedule){
-    // Almacenar en una variable el objeto event (para poder acceder al atributo checked el input que se ha seleccionado).
+    // MMM Almacenar en una variable el objeto event (para poder acceder al atributo checked el input que se ha seleccionado).
     let checkbox = event.target as HTMLInputElement;
 
     if(checkbox.checked) { 
@@ -148,23 +143,23 @@ export class FormUpdateActivityComponent {
       this.updateSchedules = this.updateSchedules.filter(item => item !== schedule.id);
     }
 
-    // Comprobar si hay al menos un horario seleccionado el botón de editar no se desahbilite.
+    // MMM Comprobar si hay al menos un horario seleccionado el botón de editar no se desahbilite.
     if (this.updateSchedules.length >= 1) {
-      // Si hay al menos uno seleccionado que el botón de editar no se ponga desahbilitado.
+      // MMM Si hay al menos uno seleccionado que el botón de editar no se ponga desahbilitado.
       this.updateActivityForm.get('ScheduleId')?.setErrors(null);
     } else {
-      // Si no hay horarios seleccionados que el botón salga desahbilitado.
+      // MMM Si no hay horarios seleccionados que el botón salga desahbilitado.
       this.updateActivityForm.get('ScheduleId')?.setErrors({ 'required': true });
     }
     
-    // Este método se debe llamar después de cualquier cambio en los horarios seleccionados.
-    // Actualizar el estado del botón después de cualquier cambio en los horarios seleccionados
+    // MMM Este método se debe llamar después de cualquier cambio en los horarios seleccionados.
+    // MMM Actualizar el estado del botón después de cualquier cambio en los horarios seleccionados
     console.log(this.updateSchedules);
     return this.updateSchedules;  
   }  
   
-  // MMM Método: updateFormControlScheduleValue. Al darle al botón de enviar el objeto que se envía al back, incluya los horarios seleccionados por el usuario, y la información se envíe actualizada.
-  // Al formulario a su controlForm schedule se le asigna el valor de la variable updateSchedules.
+  // MMM Al darle al botón de enviar el objeto que se envía al back, incluya los horarios seleccionados por el usuario, y la información se envíe actualizada.
+  // MMM Al formulario a su controlForm schedule se le asigna el valor de la variable updateSchedules.
   updateFormControlScheduleValue() {
     this.updateActivityForm.get('ScheduleId')?.setValue(this.updateSchedules);
     console.log (this.updateActivityForm);
@@ -191,21 +186,21 @@ export class FormUpdateActivityComponent {
         confirmButtonText: "¡Sí, actualízala!"
       });
     
-      // Si el usuario confirma la eliminación se hace la petición update.
+      // MMM Si el usuario confirma la eliminación se hace la petición update.
       if (result.isConfirmed) {
         try {
           // Editar la actividad
           const response = await this.activitiesService.update(this.updateActivityForm.value);
           console.log (response);
           
-          // Mostrar mensaje de que la actividad ha sido actualizada.
+          // MMM Mostrar mensaje de que la actividad ha sido actualizada.
           Swal.fire({
             title: "Actualizada",
             text: "La actividad ha sido editada correctamente",
             icon: "success"
           });
     
-          // Redirigir a la página de inicio
+          // MMM Redirigir a la página de inicio
           this.router.navigate(['/actividades', this.activity?.id]);
         } catch (error) {
           // Mensaje si falla el proceso de edición.
@@ -220,10 +215,8 @@ export class FormUpdateActivityComponent {
           this.router.navigate(['/home']);
         }
 
-      console.log (this.updateActivityForm.value);
-      
+      console.log (this.updateActivityForm.value);      
   }
-
 
   // MMM Método para mostrar el estado de todos los validadores en la consola.
   logValidatorsState() {
@@ -232,7 +225,6 @@ export class FormUpdateActivityComponent {
     console.log(`Control "${key}" tiene errores:`, controlErrors);
     });
   }
-
 }
 
 

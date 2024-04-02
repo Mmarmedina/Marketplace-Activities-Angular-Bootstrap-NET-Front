@@ -6,6 +6,7 @@ import { Activity } from '../interfaces/activity.interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ActivitiesService {
 
   private baseUrl: string;
@@ -36,11 +37,7 @@ export class ActivitiesService {
     return response; 
   }
 
-  // MMM No sé cómo hacer esto si la actividad se elimina.
   delete (pId: number): void{    
-    const response = lastValueFrom(this.httpClient.delete<Activity>(this.baseUrl + pId));
-    //  return response;
-
-    // 
+    const response = lastValueFrom(this.httpClient.delete<Activity>(this.baseUrl + pId)); 
   }
 }

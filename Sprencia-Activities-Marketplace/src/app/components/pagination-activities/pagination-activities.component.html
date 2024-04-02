@@ -1,5 +1,3 @@
-
-
 <nav aria-label="Page navigation example">
   <ul class="pagination pagination-sm">
     <li class="page-item">
@@ -11,14 +9,13 @@
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    
     <!-- MMM Para que se marque la página actual: [ngClass]="{ active: page == currentPage }" -->
     <li
       *ngFor="let page of pages"
       class="page-item" 
       [ngClass]="{ 'active': page == currentPage }" 
       >
-      <!-- Colores de la página activa y las que no lo están. -->
+      <!-- MMM Colores de la página activa y las que no lo están. -->
       <a
         (click)="pageClicked(page)"
         class="page-link mouse-pointer"
