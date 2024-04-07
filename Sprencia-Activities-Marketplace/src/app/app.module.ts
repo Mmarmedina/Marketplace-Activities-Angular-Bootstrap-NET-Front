@@ -36,7 +36,7 @@ import { PaginationActivitiesComponent } from './components/pagination-activitie
     ReviewsSprenciaThumbnailComponent,
     FormNewActivityComponent,
     FormUpdateActivityComponent,
-    PaginationActivitiesComponent
+    PaginationActivitiesComponent,
   ],
   imports: [
     BrowserModule,
