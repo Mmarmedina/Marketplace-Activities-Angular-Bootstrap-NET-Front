@@ -9,33 +9,33 @@
                     <label for="title" class="d-block fw-bold fs-6 mb-2">Título</label>
                     <input class="mb-2 p-2 w-100" id="title" name="title" type="text" formControlName="Title">
                     <p class="error"
-                        *ngIf="checkError ('title', 'required')">El título de la actividad debe tener entre 25 y 130 caracteres.
+                        *ngIf="checkError ('Title', 'required')">El título de la actividad debe tener entre 25 y 130 caracteres.
                     </p>
                     <p class="error"
-                        *ngIf="checkError ('title', 'minlength')">El título de la actividad debe tener entre 25 y 130 caracteres.
+                        *ngIf="checkError ('Title', 'minlength')">El título de la actividad debe tener entre 25 y 130 caracteres.
                     </p>
                     <p class="error"
-                    *ngIf="checkError ('title', 'maxlength')">El título de la actividad debe tener entre 25 y 130 caracteres.
+                    *ngIf="checkError ('Title', 'maxlength')">El título de la actividad debe tener entre 25 y 130 caracteres.
                     </p>
                 </div>
                 <div class="field mb-3">
                     <label for="text" class="fw-bold d-block fs-6 mb-2">Descripción</label>
-                    <textarea class="mb-2 p-2 w-100 height-input" id="text" name="description" formControlName="Description"></textarea>
+                    <textarea class="mb-2 p-2 w-100 height-input" id="text" name="Description" formControlName="Description"></textarea>
                     <p class="error"
-                        *ngIf="checkError ('description', 'required')">Debes escribir en qué consiste la actividad aquí (al menos 100 caracteres).
+                        *ngIf="checkError ('Description', 'required')">Debes escribir en qué consiste la actividad aquí (al menos 100 caracteres).
                     </p>
                     <p class="error"
-                        *ngIf="checkError ('description', 'minlength')">Debes escribir en qué consiste la actividad aquí(al menos 100 caracteres). 
+                        *ngIf="checkError ('Description', 'minlength')">Debes escribir en qué consiste la actividad aquí(al menos 100 caracteres). 
                     </p>                    
                 </div>
                 <div class="field mb-3">
                     <label for="price" class="d-block fw-bold fs-6 mb-2">Precio</label>
                     <input class="mb-2 p-2 w-75" id="price" name="price" type="number" step="0.01" min="0" formControlName="Price">
                     <p class="error"
-                        *ngIf="checkError ('price', 'pattern')">Debes indicar el precio con dos decimales.
+                        *ngIf="checkError ('Price', 'pattern')">Debes indicar el precio con dos decimales.
                     </p>
                     <p class="error"
-                        *ngIf="checkError ('price', 'required')">Campo obligatorio: debes indicar el precio de la actividad.
+                        *ngIf="checkError ('Price', 'required')">Campo obligatorio: debes indicar el precio de la actividad.
                     </p>
                 </div>
                 <div class="field mb-3">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <p class="error" 
-                        *ngIf="checkError ('schedule', 'required')">Indica los horarios de la nueva actividad.
+                        *ngIf="checkError ('ScheduleId', 'required')">Indica los horarios de la nueva actividad.
                     </p>
                 </div>
                 <button id="edit-button" class="btn btn-outline-success mt-3 mb-5 fw-bold w-50" type="submit" [disabled]="updateActivityForm.invalid">Editar</button>

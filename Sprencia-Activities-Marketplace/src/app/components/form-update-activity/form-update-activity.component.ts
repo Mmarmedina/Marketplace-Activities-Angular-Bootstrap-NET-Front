@@ -60,7 +60,6 @@ export class FormUpdateActivityComponent {
     // MMM Método para mostrar el estado de todos los validadores en la consola
     this.logValidatorsState();
 
-    // MMM Método para mostrar el estado de todos los validadores en la consola.
     this.requestUpdateActivityToBBDD();
   }
   
