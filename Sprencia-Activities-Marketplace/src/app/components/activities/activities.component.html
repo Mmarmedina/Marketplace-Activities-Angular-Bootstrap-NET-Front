@@ -8,7 +8,7 @@
         <!--MMM onClick: ouput que proyecta pagination-component (hijo) a activity-component (padre). El hijo le pasa el número de página que ha seleccionado el usuario. Dato necesario para poder mostrar en pantalla sólo las actividades de esa página.-->
         <div class="d-flex justify-content-center mt-5">
             <app-pagination-activities 
-            *ngIf="totalActivities !== 0" 
+            *ngIf="totalActivities > itemsPerPage" 
             [totalActivities]="totalActivities" 
             [itemsPerPage]="itemsPerPage" 
             [currentPage]="currentPage"

@@ -28,11 +28,16 @@ export class ReviewsSprenciaThumbnailComponent {
 
   ngOnInit() {
     this.dateFormated = formatDate(this.review.date);
+    console.log (this.isReadMore);
   }
 
   showText() {
     this.isReadMore = !this.isReadMore;
   }
+
+  // showText() {
+  //   this.isReadMore = !this.isReadMore;
+  // }
 
 }
 

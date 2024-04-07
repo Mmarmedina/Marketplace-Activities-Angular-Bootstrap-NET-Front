@@ -12,7 +12,8 @@
     </div>
     <div class="d-flex flex-column">                  
         <p [ngClass]="{'limitTextHeight': isReadMore}">{{review.reviewText}}</p>
-        <p class="small readMore" (click)="showText()"><u class="text-success">Leer más...</u></p>
+        <p class="small readMore" (click)="showText()" *ngIf="isReadMore == true"><u class="text-success">Leer más...</u></p>
+        <p class="small readMore" (click)="showText()" *ngIf="isReadMore == false"><u class="text-success">Leer menos...</u></p>
         <small class="fst-italic mb-3">Publicada el {{this.dateFormated}}</small>
     </div>
 </section>

@@ -44,12 +44,21 @@ export class ActivitiesComponent {
     // En el componente hijo: pagination-activities se pone un ngIf, para que se cargue sólo cuando el valor sea distinto a 0. Si no ha terminado de recuperar las actividades y calcular la longitud, el valor de totalActivities es 0, al ser peticiones asincrónicas.
     // El componente de paginación se carga solo cuando totalActivities tenga valor, ya tenga la longitud, y ésta sea distinta a 0 (si no hay actividades no sale la paginación). 
     // Si no se hace así totalActivities sale como un array vacío (0).    
+    
+    
+    // MMM Esta línea calcula el número total de actividades en el array activities y lo asigna a la variable totalActivities. Esto es esencial para configurar la paginación, ya que necesitamos saber cuántas actividades hay en total para calcular el número total de páginas.
     this.totalActivities = this.activities.length;
     console.log(this.totalActivities);
     console.log(this.currentPage);
     
+    // MMM Calcula el índice de inicio para las actividades que se mostrarán en la página actual. Esto se hace restando 1 del número de página actual (ya que las páginas comienzan desde 1) y multiplicando por el número de actividades por página.
     const start = (this.currentPage - 1) * (this.itemsPerPage);
+
+    // MMM Calcula el índice de finalización para las actividades que se mostrarán en la página actual. Esto se hace sumando el índice de inicio al número de actividades por página.
     const end = start + this.itemsPerPage;
+
+
+    // MMM Se Utiliza el método slice() para extraer solo las actividades de la página actual. Este nuevo array se almacena en la variable activitiesOnlyOnePage, que contiene las actividades que se mostrarán en la página actual.
     this.activitiesOnlyOnePage = this.activities.slice(start, end);
     console.log(this.currentPage);
     console.log(this.activitiesOnlyOnePage);
