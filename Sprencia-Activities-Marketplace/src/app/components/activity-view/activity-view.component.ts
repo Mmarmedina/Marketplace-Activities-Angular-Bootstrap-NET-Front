@@ -34,20 +34,16 @@ export class ActivityViewComponent {
       
       // MMM Recuperar datos de la actividad (actividad, horarios y opiniones).
       this.activity = await this.activitiesService.getById(params.idactivity);
-      console.log (this.activity);
 
       // MMM Si el servicio devuelve una actividad, del objeto activividad me quedo sólo con la información de las opiniones de la actividad (para pintar las opiniones).
       this.reviewsActivity = this.getReviews(this.activity);
-      console.log(this.reviewsActivity);
-
+      
       // MMM Se crea un objeto tipo ReviewFormatted: es igual que Review pero con la fecha tipo string. 
       // MMM El objetivo es poder pintar todos los datos de las opiniones de la actividad, incluida la fecha formateada.
       this.reviewsActivityFormatted = this.mapToReviewsActivityFormated(this.reviewsActivity || []);
-      console.log (this.reviewsActivityFormatted); 
 
       // MMM Mostrar en la cabecera de la página (arriba de la página) el número de opiniones.
-      this.numberOfReviews = this.getNumberOfReviews(this.reviewsActivity);
-      console.log (this.numberOfReviews);      
+      this.numberOfReviews = this.getNumberOfReviews(this.reviewsActivity);      
     })
   }
 

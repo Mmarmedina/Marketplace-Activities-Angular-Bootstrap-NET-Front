@@ -41,25 +41,17 @@ export class FormUpdateActivityComponent {
       // MMM Petición al servicio para recuperar la actividad que se pretende editar.
       const id = parseInt(params.idactivity);
       this.activity = await this.activitiesService.getById(params.idactivity);
-      console.log(this.activity);
-      console.log (this.activity.schedule);
       
       // MMM Que al cargar la página salgan los valores que tiene la actividad grabados en base de datos.
       this.setDefaultFormValues(this.allSchedules);
       
-      // Método para mostrar el estado de todos los validadores en la consola
-      this.logValidatorsState();
     })
   }
 
   async onSubmit() {
     // MMM Al darle al botón de enviar el objeto que se envía al back, incluya los horarios seleccionados por el usuario, y la información se envíe actualizada.
     this.updateFormControlScheduleValue();
-    console.log (this.updateActivityForm.value);
-
-    // MMM Método para mostrar el estado de todos los validadores en la consola
-    this.logValidatorsState();
-
+  
     this.requestUpdateActivityToBBDD();
   }
   
@@ -77,7 +69,6 @@ export class FormUpdateActivityComponent {
   // MMM Petición de todos los horarios (mañana, tarde, fin de semana).
   async getAllSchedules(): Promise<Schedule[]> {
     this.allSchedules = await this.schedulesService.getAll();
-    console.log (this.allSchedules);
     return this.allSchedules;    
   }
 
@@ -85,9 +76,6 @@ export class FormUpdateActivityComponent {
   setDefaultFormValues(allSchedules: Schedule[]) {   
     // MMM Asignar valores por defecto
     if (this.activity) {      
-      console.log (this.activity);
-      console.log (this.activity.schedule);
-
       // MMM updateActivityForm es el formulario, estamos asignándole a cada una de sus propiedades los valores de la actividad recuperada de BBDD.
       this.updateActivityForm.patchValue({
         Id: this.activity.id,
@@ -101,8 +89,7 @@ export class FormUpdateActivityComponent {
       // Se recupera de base de datos la actividad, almacenados en al variable activity (que incluye los horarios de la misma).  
       // selectedSchedulesIdsByDefault: es un array tipo number, que recoge los IDs que tiene en BBDD de la actividad que se quire editar. De la actividad recuperada sólo queremos quedarnos con schedule.id, es decir, un array con los ids de los horarios de la misma (activity.schedule incluye el id del horario y su name). 
     const selectedSchedulesIdsByDefault: number[] | undefined = this.activity?.schedule.map(schedule => schedule.id);
-    console.log(selectedSchedulesIdsByDefault);
-
+    
     // Asignar los IDs de los horarios por defecto a updateSchedules (variable que almacena los horarios marcados en cada momento, cuando se interactúa con el formulario).
     if (selectedSchedulesIdsByDefault) {
       this.updateSchedules = [...selectedSchedulesIdsByDefault];
@@ -152,8 +139,7 @@ export class FormUpdateActivityComponent {
     }
     
     // MMM Este método se debe llamar después de cualquier cambio en los horarios seleccionados.
-    // MMM Actualizar el estado del botón después de cualquier cambio en los horarios seleccionados
-    console.log(this.updateSchedules);
+    // MMM Actualizar el estado del botón después de cualquier cambio en los horarios seleccionados.
     return this.updateSchedules;  
   }  
   
@@ -161,7 +147,6 @@ export class FormUpdateActivityComponent {
   // MMM Al formulario a su controlForm schedule se le asigna el valor de la variable updateSchedules.
   updateFormControlScheduleValue() {
     this.updateActivityForm.get('ScheduleId')?.setValue(this.updateSchedules);
-    console.log (this.updateActivityForm);
   }
 
   // MMM Método para mostrar el mensaje de error cuando no se rellena correctamente el campo.
@@ -175,56 +160,43 @@ export class FormUpdateActivityComponent {
   
   // MMM Petición al servicio de actualización de la actividad. 
   async requestUpdateActivityToBBDD(): Promise<void> {    
-      const result = await Swal.fire({
-        title: "¿Estás seguro de que quieres editar la actividad?",
-        // text: "Esta acción es irreversible",
-        // icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "¡Sí, actualízala!"
-      });
-    
-      // MMM Si el usuario confirma la eliminación se hace la petición update.
-      if (result.isConfirmed) {
-        try {
-          // Editar la actividad
-          const response = await this.activitiesService.update(this.updateActivityForm.value);
-          console.log (response);
-          
-          // MMM Mostrar mensaje de que la actividad ha sido actualizada.
-          Swal.fire({
-            title: "Actualizada",
-            text: "La actividad ha sido editada correctamente",
-            icon: "success"
-          });
-    
-          // MMM Redirigir a la página de inicio
-          this.router.navigate(['/actividades', this.activity?.id]);
-        } catch (error) {
-          // Mensaje si falla el proceso de edición.
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "La actividad no se ha podido eliminar. Inténtalo de nuevo.",
-            // footer: '<a href="#">Why do I have this issue?</a>'
-          });
-        }// Si le da a cancelar redirige a home.
-        } else {
-          this.router.navigate(['/home']);
-        }
-
-      console.log (this.updateActivityForm.value);      
-  }
-
-  // MMM Método para mostrar el estado de todos los validadores en la consola.
-  logValidatorsState() {
-  Object.keys(this.updateActivityForm.controls).forEach(key => {
-    const controlErrors = this.updateActivityForm.get(key)?.errors;
-    console.log(`Control "${key}" tiene errores:`, controlErrors);
+    const result = await Swal.fire({
+      title: "¿Estás seguro de que quieres editar la actividad?",
+      // text: "Esta acción es irreversible",
+      // icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "¡Sí, actualízala!"
     });
+  
+  // MMM Si el usuario confirma la eliminación se hace la petición update.
+  if (result.isConfirmed) {
+    try {
+      // Editar la actividad
+      const response = await this.activitiesService.update(this.updateActivityForm.value);
+      
+      // MMM Mostrar mensaje de que la actividad ha sido actualizada.
+      Swal.fire({
+        title: "Actualizada",
+        text: "La actividad ha sido editada correctamente",
+        icon: "success"
+      });
+
+      // MMM Redirigir a la página de inicio
+      this.router.navigate(['/actividades', this.activity?.id]);
+    } catch (error) {
+      // Mensaje si falla el proceso de edición.
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "La actividad no se ha podido eliminar. Inténtalo de nuevo.",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    }// Si le da a cancelar redirige a home.
+    } else {
+      this.router.navigate(['/home']);
+    }          
   }
 }
-
-
 

@@ -33,7 +33,6 @@ export class FormNewActivityComponent {
   // MMM Se hace una petición al servicio para que ejecute el método create, el cual sirve para hacer una solicitud de inserción de una nueva actividad en BBDD.
   async onSubmit() {
     this.updateFormControlScheduleValue(this.selectedSchedules);
-    console.log (this.newActivityForm.value);
 
     this.requestCreateActivityToBBDD();
   }
@@ -50,7 +49,6 @@ export class FormNewActivityComponent {
   // MMM Petición al servicio de todos los horarios (entidad Schedules en BBDD) para pintar el checkbox con los horarios en los que podría realizarse la nueva actividad.
   async getAllSchedules() {
     this.allSchedules = await this.schedulesService.getAll();
-    console.log (this.allSchedules);
   }
 
   // MMM Si se marca el check de un horario se dispara evento change y checkbox seleccionado toma valor true. Cuando esto sucede entra en el if, y el objeto con los datos del horario seleccionado (schedule) se añade al array selectedSchedules.
@@ -63,8 +61,6 @@ export class FormNewActivityComponent {
     }else {
       this.selectedSchedules = this.selectedSchedules.filter(item => item !== schedule.id);
     }
-
-    console.log(this.selectedSchedules);
     return this.selectedSchedules;    
   }
 
@@ -89,7 +85,6 @@ export class FormNewActivityComponent {
       try {
         // MMM Añadir la actividad
         const response = await this.activitiesService.create(this.newActivityForm.value);
-        console.log (response);
 
         // MMM Mostrar mensaje de que la actividad ha sido actualizada.
         Swal.fire({

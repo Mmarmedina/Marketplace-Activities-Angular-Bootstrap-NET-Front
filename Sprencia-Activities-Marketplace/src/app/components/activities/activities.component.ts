@@ -30,7 +30,6 @@ export class ActivitiesComponent {
   async getAllAndPaginate(): Promise<void> {
     // MMM Se recupera el array de actividades.
     this.activities = await this.activitiesService.getAll();
-    console.log (this.activities);
 
     // MMM Nos quedamos sólo con las que saldrán en una página.
     this.paginatedData();   
@@ -48,8 +47,6 @@ export class ActivitiesComponent {
     
     // MMM Esta línea calcula el número total de actividades en el array activities y lo asigna a la variable totalActivities. Esto es esencial para configurar la paginación, ya que necesitamos saber cuántas actividades hay en total para calcular el número total de páginas.
     this.totalActivities = this.activities.length;
-    console.log(this.totalActivities);
-    console.log(this.currentPage);
     
     // MMM Calcula el índice de inicio para las actividades que se mostrarán en la página actual. Esto se hace restando 1 del número de página actual (ya que las páginas comienzan desde 1) y multiplicando por el número de actividades por página.
     const start = (this.currentPage - 1) * (this.itemsPerPage);
@@ -57,17 +54,13 @@ export class ActivitiesComponent {
     // MMM Calcula el índice de finalización para las actividades que se mostrarán en la página actual. Esto se hace sumando el índice de inicio al número de actividades por página.
     const end = start + this.itemsPerPage;
 
-
     // MMM Se Utiliza el método slice() para extraer solo las actividades de la página actual. Este nuevo array se almacena en la variable activitiesOnlyOnePage, que contiene las actividades que se mostrarán en la página actual.
     this.activitiesOnlyOnePage = this.activities.slice(start, end);
-    console.log(this.currentPage);
-    console.log(this.activitiesOnlyOnePage);
   }
   
   // MMM El componente activity (padre), recibe el ouput del hijo (pagination-activities) con el número de página que se ha clicado, y la página pulsada se convierte en la página actual. 
   changePage(page: number): void {
     this.currentPage = page;
-    console.log(page);
     this.paginatedData();
   }    
 }

@@ -37,19 +37,11 @@ export class PaginationActivitiesComponent {
     // MMM El método Math.ceil sirve para que si el resultado de totalPages da con decimal redondea al entero más cercano hacia arriba.
     if(this.totalActivities) {
       this.totalPages = Math.ceil(this.totalActivities / this.itemsPerPage);
-      console.log(this.totalPages);
-
+      
       // MMM Después de saber el número de páginas que necesitamos, se crea un array de tipo enteros, que se recorrerá con un ngFor* para generar las páginas (ver HTML ngFor*).
       // MMM { length: this.totalPages }: se utiliza para especificar la longitud del nuevo array. Si el valor de this.totalPages es 10, por ejemplo, es que necesitamos 10 páginas, y el array deberá tener 10 índices.
       // MMM (_, i) => i + 1: es un callback que se utiliza para transformar cada elemento del array creado. En este caso, el primer parámetro _ es el valor del elemento (que en este caso no se usa, por eso se usa _ para indicar que es un parámetro no utilizado), y i es el índice del elemento en el array. La expresión i + 1 simplemente devuelve el índice más uno, lo que significa que los números en el array resultante comenzarán desde 1 y aumentarán de uno en uno.
-      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-
-      console.log(this.pages);
-      console.log(this.totalActivities); 
-      console.log (this.totalPages);
-      console.log(this.itemsPerPage);
-      console.log(this.currentPage);
-      
+      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);      
     }
   }
 
@@ -58,6 +50,5 @@ export class PaginationActivitiesComponent {
   pageClicked(page: number) {
     if(page > this.totalPages || page == 0 ) return
     this.onClick.emit(page);
-    console.log(page);
   }
 }
