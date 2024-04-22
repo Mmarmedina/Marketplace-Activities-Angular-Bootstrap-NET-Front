@@ -14,7 +14,7 @@ export class PaginationActivitiesComponent {
   @Input() totalActivities: number;
   // MMM Número de actividades por pagina.
   @Input() itemsPerPage: number;
-  // MMM Página actual
+  // MMM Página actual  (sombrear página actual, gestionar avanzar y retroceder).
   @Input() currentPage: number;
 
   // MMM Cuando se hace click en una página se proyecta al padre el número de página pulsada.

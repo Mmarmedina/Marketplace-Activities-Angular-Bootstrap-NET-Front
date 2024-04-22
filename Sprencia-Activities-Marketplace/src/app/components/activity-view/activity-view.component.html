@@ -112,10 +112,16 @@
       <!--  MMM Opiniones -->
       <h2 class="h6 fw-bold my-3 mb-4" *ngIf="numberOfReviews !== undefined && numberOfReviews > 0">Opiniones</h2>                    
       <section id="reviews" class="d-flex flex-column border border-secondary rounded px-4 my-4" *ngFor="let review of reviewsActivityFormatted">
-        <div class="d-flex align-items-center">
-          <img class="user-img" src="assets\img\user-logo.png" alt="user-img">
-          <p class="h6 fw-bold w-100">{{review.author}}</p>
-          <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+      
+      
+        <div class="d-flex flex-column align-items-center my-2 flex-lg-row justify-content-lg-between">
+          <div class="d-flex flex-column flex-lg-row align-items-center">
+            <img class="user-img" src="assets\img\user-logo.png" alt="user-img">
+            <p class="h6 fw-bold">{{review.author}}</p>
+          </div>
+          <div>
+            <i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>
+          </div>
         </div>
         <div class="d-flex flex-column">                  
           <p>{{review.reviewText}}</p>
