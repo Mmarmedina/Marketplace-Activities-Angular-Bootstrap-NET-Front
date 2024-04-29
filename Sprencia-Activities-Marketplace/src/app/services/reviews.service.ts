@@ -12,9 +12,7 @@ export class ReviewsService {
   private baseUrl: string;
   
   constructor(private httpClient: HttpClient) {
-    // this.baseUrl = 'http://localhost:5062/api/Review/Sprencia/';
-    this.baseUrl = 'https://sprenciaapi.azurewebsites.net/api/Review/Sprencia/';
-    
+    this.baseUrl = 'http://localhost:5062/api/Review/Sprencia/';
   }
 
   getAll(): Promise<Review[]> {

@@ -12,8 +12,7 @@ export class SchedulesService {
   private baseUrl: string; 
 
   constructor(private httpClient: HttpClient) {
-    // this.baseUrl = 'http://localhost:5062/api/Schedule/';
-    this.baseUrl = 'https://sprenciaapi.azurewebsites.net/api/Schedule/';   
+    this.baseUrl = 'http://localhost:5062/api/Schedule/';
    }
 
    getAll(): Promise<Schedule[]> {

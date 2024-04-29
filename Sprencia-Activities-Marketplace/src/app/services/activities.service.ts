@@ -12,8 +12,7 @@ export class ActivitiesService {
   private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    // this.baseUrl = 'http://localhost:5062/api/Activity/';
-    this.baseUrl = 'https://sprenciaapi.azurewebsites.net/api/Activity/';
+    this.baseUrl = 'http://localhost:5062/api/Activity/';
   }
 
   getAll(): Promise<Activity[]> {
