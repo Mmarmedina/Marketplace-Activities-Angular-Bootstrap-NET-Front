@@ -1,0 +1,9 @@
+*.docx
+node_modules
+.vscode
+.ds_store
+bin
+obj
+packages
+.vs
+*.pdf
