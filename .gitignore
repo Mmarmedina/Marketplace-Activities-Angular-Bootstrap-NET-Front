@@ -7,3 +7,5 @@ obj
 packages
 .vs
 *.pdf
+# Local Netlify folder
+.netlify
